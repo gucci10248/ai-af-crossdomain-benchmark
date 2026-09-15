@@ -81,14 +81,15 @@ abst_clean = re.sub(r"\n?（\*\*.*?）\n?", "", abst, flags=re.S).strip()
 kw_m = re.search(r"^Keywords:\s*(.+)$", md8, re.M)
 keywords = kw_m.group(1).strip()
 
-# --- 参考文献：解析 07 的两张表 ---
-refs = []
+# --- 参考文献：解析 07 的表格，**保留原编号**（避免与正文 [n] 错位）---
+refmap = {}
 for m in re.finditer(r"^\|\s*(\d+)\s*\|\s*(.+?)\s*\|\s*([^|]*)\|\s*$", md7, re.M):
-    num, cite, tail = m.group(1), m.group(2), m.group(3).strip()
+    num, cite = int(m.group(1)), m.group(2).strip()
     if cite.startswith("完整著录") or cite.startswith("---"):
         continue
-    refs.append(cite)
-refs = refs[:24]
+    refmap[num] = cite
+refs = [refmap[k] for k in sorted(refmap)]
+print("refs parsed:", len(refs), "| 编号:", sorted(refmap)[:3], "...", sorted(refmap)[-3:])
 
 # ============ 正文文件 ============
 d = base_doc()
@@ -191,8 +192,8 @@ body(d, "All data are openly available: PTB-XL v1.0.3 (doi:10.13026/kfzx-aw45), 
         "repository: https://github.com/gucci10248/ai-af-crossdomain-benchmark.")
 
 h(d, "References", 1)
-for i, cite in enumerate(refs, 1):
-    body(d, f"{i}. {cite}")
+for k in sorted(refmap):
+    body(d, f"{k}. {refmap[k]}")
 
 out1 = ART / "P2_manuscript_v0.1.docx"
 d.save(out1)
