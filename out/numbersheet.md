@@ -1,6 +1,6 @@
 # 权威数字表（写作时只从此处取数）
 
-生成时间：见文件 mtime ｜ 共 90 条 ｜ 来源：out/*.csv|json（均为脚本真实运行输出）
+生成时间：见文件 mtime ｜ 共 154 条 ｜ 来源：out/*.csv|json（均为脚本真实运行输出）
 
 ## 数据
 
@@ -121,4 +121,73 @@
 | CPSC2021 external (China, trained on PTB-XL/logreg) | n=583 AUROC 0.904 Brier 0.449 ECE 0.476 Se@Sp90 0.604 | out/results_exp1.json | run_experiment.py |
 | CPSC2021 external (China, trained on PTB-XL/hgb) | n=583 AUROC 0.946 Brier 0.128 ECE 0.143 Se@Sp90 0.868 | out/results_exp1.json | run_experiment.py |
 | CPSC2021 in-domain 5-fold (grouped by patient) | n=583 AUROC 0.923 Brier 0.136 ECE 0.126 Se@Sp90 0.786 | out/results_exp1.json | run_experiment.py |
+
+## PPV/NPV
+
+| 项目 | 数值 | 来源文件 | 复现脚本 |
+|---|---|---|---|
+| 本研究 · 内部验证（PTB-XL，Se@Sp90） · 患病率1% | PPV 8.7% / NPV 99.93% / 每检出1例需复核 11.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 内部验证（PTB-XL，Se@Sp90） · 患病率1% | PPV 8.7% / NPV 99.93% / 每检出1例需复核 11.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 内部验证（PTB-XL，Se@Sp90） · 患病率1% | PPV 8.7% / NPV 99.93% / 每检出1例需复核 11.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 内部验证（PTB-XL，Se@Sp90） · 患病率1% | PPV 8.7% / NPV 99.93% / 每检出1例需复核 11.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 内部验证（PTB-XL，Se@Sp90） · 患病率1% | PPV 8.7% / NPV 99.93% / 每检出1例需复核 11.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 内部验证（PTB-XL，Se@Sp90） · 患病率1% | PPV 8.7% / NPV 99.93% / 每检出1例需复核 11.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 内部验证（PTB-XL，Se@Sp90） · 患病率1% | PPV 8.7% / NPV 99.93% / 每检出1例需复核 11.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 内部验证（PTB-XL，Se@Sp90） · 患病率1% | PPV 8.7% / NPV 99.93% / 每检出1例需复核 11.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 可穿戴（0.5 阈值） · 患病率1% | PPV 2.7% / NPV 99.91% / 每检出1例需复核 36.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 可穿戴（0.5 阈值） · 患病率1% | PPV 2.7% / NPV 99.91% / 每检出1例需复核 36.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 可穿戴（0.5 阈值） · 患病率1% | PPV 2.7% / NPV 99.91% / 每检出1例需复核 36.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 可穿戴（0.5 阈值） · 患病率1% | PPV 2.7% / NPV 99.91% / 每检出1例需复核 36.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 可穿戴（0.5 阈值） · 患病率1% | PPV 2.7% / NPV 99.91% / 每检出1例需复核 36.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 可穿戴（0.5 阈值） · 患病率1% | PPV 2.7% / NPV 99.91% / 每检出1例需复核 36.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 可穿戴（0.5 阈值） · 患病率1% | PPV 2.7% / NPV 99.91% / 每检出1例需复核 36.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 可穿戴（0.5 阈值） · 患病率1% | PPV 2.7% / NPV 99.91% / 每检出1例需复核 36.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 可穿戴（Se@Sp90） · 患病率1% | PPV 5.7% / NPV 99.55% / 每检出1例需复核 17.6 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 可穿戴（Se@Sp90） · 患病率1% | PPV 5.7% / NPV 99.55% / 每检出1例需复核 17.6 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 可穿戴（Se@Sp90） · 患病率1% | PPV 5.7% / NPV 99.55% / 每检出1例需复核 17.6 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 可穿戴（Se@Sp90） · 患病率1% | PPV 5.7% / NPV 99.55% / 每检出1例需复核 17.6 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 可穿戴（Se@Sp90） · 患病率1% | PPV 5.7% / NPV 99.55% / 每检出1例需复核 17.6 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 可穿戴（Se@Sp90） · 患病率1% | PPV 5.7% / NPV 99.55% / 每检出1例需复核 17.6 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 可穿戴（Se@Sp90） · 患病率1% | PPV 5.7% / NPV 99.55% / 每检出1例需复核 17.6 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 可穿戴（Se@Sp90） · 患病率1% | PPV 5.7% / NPV 99.55% / 每检出1例需复核 17.6 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 严格 A vs N（Se@Sp90） · 患病率1% | PPV 8.1% / NPV 99.86% / 每检出1例需复核 12.3 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 严格 A vs N（Se@Sp90） · 患病率1% | PPV 8.1% / NPV 99.86% / 每检出1例需复核 12.3 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 严格 A vs N（Se@Sp90） · 患病率1% | PPV 8.1% / NPV 99.86% / 每检出1例需复核 12.3 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 严格 A vs N（Se@Sp90） · 患病率1% | PPV 8.1% / NPV 99.86% / 每检出1例需复核 12.3 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 严格 A vs N（Se@Sp90） · 患病率1% | PPV 8.1% / NPV 99.86% / 每检出1例需复核 12.3 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 严格 A vs N（Se@Sp90） · 患病率1% | PPV 8.1% / NPV 99.86% / 每检出1例需复核 12.3 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 严格 A vs N（Se@Sp90） · 患病率1% | PPV 8.1% / NPV 99.86% / 每检出1例需复核 12.3 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 严格 A vs N（Se@Sp90） · 患病率1% | PPV 8.1% / NPV 99.86% / 每检出1例需复核 12.3 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 A vs 噪声（Se@Sp90） · 患病率1% | PPV 2.0% / NPV 99.11% / 每检出1例需复核 50.7 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 A vs 噪声（Se@Sp90） · 患病率1% | PPV 2.0% / NPV 99.11% / 每检出1例需复核 50.7 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 A vs 噪声（Se@Sp90） · 患病率1% | PPV 2.0% / NPV 99.11% / 每检出1例需复核 50.7 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 A vs 噪声（Se@Sp90） · 患病率1% | PPV 2.0% / NPV 99.11% / 每检出1例需复核 50.7 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 A vs 噪声（Se@Sp90） · 患病率1% | PPV 2.0% / NPV 99.11% / 每检出1例需复核 50.7 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 A vs 噪声（Se@Sp90） · 患病率1% | PPV 2.0% / NPV 99.11% / 每检出1例需复核 50.7 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 A vs 噪声（Se@Sp90） · 患病率1% | PPV 2.0% / NPV 99.11% / 每检出1例需复核 50.7 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 外部1 A vs 噪声（Se@Sp90） · 患病率1% | PPV 2.0% / NPV 99.11% / 每检出1例需复核 50.7 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 中国域 CPSC2021（Se@Sp90） · 患病率1% | PPV 8.0% / NPV 99.84% / 每检出1例需复核 12.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 中国域 CPSC2021（Se@Sp90） · 患病率1% | PPV 8.0% / NPV 99.84% / 每检出1例需复核 12.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 中国域 CPSC2021（Se@Sp90） · 患病率1% | PPV 8.0% / NPV 99.84% / 每检出1例需复核 12.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 中国域 CPSC2021（Se@Sp90） · 患病率1% | PPV 8.0% / NPV 99.84% / 每检出1例需复核 12.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 中国域 CPSC2021（Se@Sp90） · 患病率1% | PPV 8.0% / NPV 99.84% / 每检出1例需复核 12.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 中国域 CPSC2021（Se@Sp90） · 患病率1% | PPV 8.0% / NPV 99.84% / 每检出1例需复核 12.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 中国域 CPSC2021（Se@Sp90） · 患病率1% | PPV 8.0% / NPV 99.84% / 每检出1例需复核 12.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 本研究 · 中国域 CPSC2021（Se@Sp90） · 患病率1% | PPV 8.0% / NPV 99.84% / 每检出1例需复核 12.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 PACE 2024（间期级，消融人群） · 患病率1% | PPV 66.0% / NPV 99.96% / 每检出1例需复核 1.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 PACE 2024（间期级，消融人群） · 患病率1% | PPV 66.0% / NPV 99.96% / 每检出1例需复核 1.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 PACE 2024（间期级，消融人群） · 患病率1% | PPV 66.0% / NPV 99.96% / 每检出1例需复核 1.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 PACE 2024（间期级，消融人群） · 患病率1% | PPV 66.0% / NPV 99.96% / 每检出1例需复核 1.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 PACE 2024（间期级，消融人群） · 患病率1% | PPV 66.0% / NPV 99.96% / 每检出1例需复核 1.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 PACE 2024（间期级，消融人群） · 患病率1% | PPV 66.0% / NPV 99.96% / 每检出1例需复核 1.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 PACE 2024（间期级，消融人群） · 患病率1% | PPV 66.0% / NPV 99.96% / 每检出1例需复核 1.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 PACE 2024（间期级，消融人群） · 患病率1% | PPV 66.0% / NPV 99.96% / 每检出1例需复核 1.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率1% | PPV 57.7% / NPV 99.99% / 每检出1例需复核 1.7 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率1% | PPV 57.7% / NPV 99.99% / 每检出1例需复核 1.7 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率1% | PPV 57.7% / NPV 99.99% / 每检出1例需复核 1.7 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率1% | PPV 57.7% / NPV 99.99% / 每检出1例需复核 1.7 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率1% | PPV 57.7% / NPV 99.99% / 每检出1例需复核 1.7 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率1% | PPV 57.7% / NPV 99.99% / 每检出1例需复核 1.7 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率1% | PPV 57.7% / NPV 99.99% / 每检出1例需复核 1.7 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率1% | PPV 57.7% / NPV 99.99% / 每检出1例需复核 1.7 例 | out/table_ppv_npv.csv | ppv_npv.py |
 

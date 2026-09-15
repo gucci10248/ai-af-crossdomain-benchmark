@@ -628,5 +628,453 @@
   "value": "n=583 AUROC 0.923 Brier 0.136 ECE 0.126 Se@Sp90 0.786",
   "source": "out/results_exp1.json",
   "script": "run_experiment.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 内部验证（PTB-XL，Se@Sp90） · 患病率1%",
+  "value": "PPV 8.7% / NPV 99.93% / 每检出1例需复核 11.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 内部验证（PTB-XL，Se@Sp90） · 患病率1%",
+  "value": "PPV 8.7% / NPV 99.93% / 每检出1例需复核 11.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 内部验证（PTB-XL，Se@Sp90） · 患病率1%",
+  "value": "PPV 8.7% / NPV 99.93% / 每检出1例需复核 11.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 内部验证（PTB-XL，Se@Sp90） · 患病率1%",
+  "value": "PPV 8.7% / NPV 99.93% / 每检出1例需复核 11.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 内部验证（PTB-XL，Se@Sp90） · 患病率1%",
+  "value": "PPV 8.7% / NPV 99.93% / 每检出1例需复核 11.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 内部验证（PTB-XL，Se@Sp90） · 患病率1%",
+  "value": "PPV 8.7% / NPV 99.93% / 每检出1例需复核 11.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 内部验证（PTB-XL，Se@Sp90） · 患病率1%",
+  "value": "PPV 8.7% / NPV 99.93% / 每检出1例需复核 11.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 内部验证（PTB-XL，Se@Sp90） · 患病率1%",
+  "value": "PPV 8.7% / NPV 99.93% / 每检出1例需复核 11.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 可穿戴（0.5 阈值） · 患病率1%",
+  "value": "PPV 2.7% / NPV 99.91% / 每检出1例需复核 36.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 可穿戴（0.5 阈值） · 患病率1%",
+  "value": "PPV 2.7% / NPV 99.91% / 每检出1例需复核 36.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 可穿戴（0.5 阈值） · 患病率1%",
+  "value": "PPV 2.7% / NPV 99.91% / 每检出1例需复核 36.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 可穿戴（0.5 阈值） · 患病率1%",
+  "value": "PPV 2.7% / NPV 99.91% / 每检出1例需复核 36.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 可穿戴（0.5 阈值） · 患病率1%",
+  "value": "PPV 2.7% / NPV 99.91% / 每检出1例需复核 36.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 可穿戴（0.5 阈值） · 患病率1%",
+  "value": "PPV 2.7% / NPV 99.91% / 每检出1例需复核 36.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 可穿戴（0.5 阈值） · 患病率1%",
+  "value": "PPV 2.7% / NPV 99.91% / 每检出1例需复核 36.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 可穿戴（0.5 阈值） · 患病率1%",
+  "value": "PPV 2.7% / NPV 99.91% / 每检出1例需复核 36.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 可穿戴（Se@Sp90） · 患病率1%",
+  "value": "PPV 5.7% / NPV 99.55% / 每检出1例需复核 17.6 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 可穿戴（Se@Sp90） · 患病率1%",
+  "value": "PPV 5.7% / NPV 99.55% / 每检出1例需复核 17.6 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 可穿戴（Se@Sp90） · 患病率1%",
+  "value": "PPV 5.7% / NPV 99.55% / 每检出1例需复核 17.6 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 可穿戴（Se@Sp90） · 患病率1%",
+  "value": "PPV 5.7% / NPV 99.55% / 每检出1例需复核 17.6 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 可穿戴（Se@Sp90） · 患病率1%",
+  "value": "PPV 5.7% / NPV 99.55% / 每检出1例需复核 17.6 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 可穿戴（Se@Sp90） · 患病率1%",
+  "value": "PPV 5.7% / NPV 99.55% / 每检出1例需复核 17.6 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 可穿戴（Se@Sp90） · 患病率1%",
+  "value": "PPV 5.7% / NPV 99.55% / 每检出1例需复核 17.6 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 可穿戴（Se@Sp90） · 患病率1%",
+  "value": "PPV 5.7% / NPV 99.55% / 每检出1例需复核 17.6 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 严格 A vs N（Se@Sp90） · 患病率1%",
+  "value": "PPV 8.1% / NPV 99.86% / 每检出1例需复核 12.3 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 严格 A vs N（Se@Sp90） · 患病率1%",
+  "value": "PPV 8.1% / NPV 99.86% / 每检出1例需复核 12.3 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 严格 A vs N（Se@Sp90） · 患病率1%",
+  "value": "PPV 8.1% / NPV 99.86% / 每检出1例需复核 12.3 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 严格 A vs N（Se@Sp90） · 患病率1%",
+  "value": "PPV 8.1% / NPV 99.86% / 每检出1例需复核 12.3 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 严格 A vs N（Se@Sp90） · 患病率1%",
+  "value": "PPV 8.1% / NPV 99.86% / 每检出1例需复核 12.3 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 严格 A vs N（Se@Sp90） · 患病率1%",
+  "value": "PPV 8.1% / NPV 99.86% / 每检出1例需复核 12.3 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 严格 A vs N（Se@Sp90） · 患病率1%",
+  "value": "PPV 8.1% / NPV 99.86% / 每检出1例需复核 12.3 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 严格 A vs N（Se@Sp90） · 患病率1%",
+  "value": "PPV 8.1% / NPV 99.86% / 每检出1例需复核 12.3 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 A vs 噪声（Se@Sp90） · 患病率1%",
+  "value": "PPV 2.0% / NPV 99.11% / 每检出1例需复核 50.7 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 A vs 噪声（Se@Sp90） · 患病率1%",
+  "value": "PPV 2.0% / NPV 99.11% / 每检出1例需复核 50.7 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 A vs 噪声（Se@Sp90） · 患病率1%",
+  "value": "PPV 2.0% / NPV 99.11% / 每检出1例需复核 50.7 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 A vs 噪声（Se@Sp90） · 患病率1%",
+  "value": "PPV 2.0% / NPV 99.11% / 每检出1例需复核 50.7 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 A vs 噪声（Se@Sp90） · 患病率1%",
+  "value": "PPV 2.0% / NPV 99.11% / 每检出1例需复核 50.7 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 A vs 噪声（Se@Sp90） · 患病率1%",
+  "value": "PPV 2.0% / NPV 99.11% / 每检出1例需复核 50.7 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 A vs 噪声（Se@Sp90） · 患病率1%",
+  "value": "PPV 2.0% / NPV 99.11% / 每检出1例需复核 50.7 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 外部1 A vs 噪声（Se@Sp90） · 患病率1%",
+  "value": "PPV 2.0% / NPV 99.11% / 每检出1例需复核 50.7 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 中国域 CPSC2021（Se@Sp90） · 患病率1%",
+  "value": "PPV 8.0% / NPV 99.84% / 每检出1例需复核 12.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 中国域 CPSC2021（Se@Sp90） · 患病率1%",
+  "value": "PPV 8.0% / NPV 99.84% / 每检出1例需复核 12.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 中国域 CPSC2021（Se@Sp90） · 患病率1%",
+  "value": "PPV 8.0% / NPV 99.84% / 每检出1例需复核 12.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 中国域 CPSC2021（Se@Sp90） · 患病率1%",
+  "value": "PPV 8.0% / NPV 99.84% / 每检出1例需复核 12.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 中国域 CPSC2021（Se@Sp90） · 患病率1%",
+  "value": "PPV 8.0% / NPV 99.84% / 每检出1例需复核 12.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 中国域 CPSC2021（Se@Sp90） · 患病率1%",
+  "value": "PPV 8.0% / NPV 99.84% / 每检出1例需复核 12.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 中国域 CPSC2021（Se@Sp90） · 患病率1%",
+  "value": "PPV 8.0% / NPV 99.84% / 每检出1例需复核 12.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "本研究 · 中国域 CPSC2021（Se@Sp90） · 患病率1%",
+  "value": "PPV 8.0% / NPV 99.84% / 每检出1例需复核 12.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 PACE 2024（间期级，消融人群） · 患病率1%",
+  "value": "PPV 66.0% / NPV 99.96% / 每检出1例需复核 1.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 PACE 2024（间期级，消融人群） · 患病率1%",
+  "value": "PPV 66.0% / NPV 99.96% / 每检出1例需复核 1.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 PACE 2024（间期级，消融人群） · 患病率1%",
+  "value": "PPV 66.0% / NPV 99.96% / 每检出1例需复核 1.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 PACE 2024（间期级，消融人群） · 患病率1%",
+  "value": "PPV 66.0% / NPV 99.96% / 每检出1例需复核 1.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 PACE 2024（间期级，消融人群） · 患病率1%",
+  "value": "PPV 66.0% / NPV 99.96% / 每检出1例需复核 1.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 PACE 2024（间期级，消融人群） · 患病率1%",
+  "value": "PPV 66.0% / NPV 99.96% / 每检出1例需复核 1.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 PACE 2024（间期级，消融人群） · 患病率1%",
+  "value": "PPV 66.0% / NPV 99.96% / 每检出1例需复核 1.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 PACE 2024（间期级，消融人群） · 患病率1%",
+  "value": "PPV 66.0% / NPV 99.96% / 每检出1例需复核 1.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率1%",
+  "value": "PPV 57.7% / NPV 99.99% / 每检出1例需复核 1.7 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率1%",
+  "value": "PPV 57.7% / NPV 99.99% / 每检出1例需复核 1.7 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率1%",
+  "value": "PPV 57.7% / NPV 99.99% / 每检出1例需复核 1.7 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率1%",
+  "value": "PPV 57.7% / NPV 99.99% / 每检出1例需复核 1.7 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率1%",
+  "value": "PPV 57.7% / NPV 99.99% / 每检出1例需复核 1.7 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率1%",
+  "value": "PPV 57.7% / NPV 99.99% / 每检出1例需复核 1.7 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率1%",
+  "value": "PPV 57.7% / NPV 99.99% / 每检出1例需复核 1.7 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率1%",
+  "value": "PPV 57.7% / NPV 99.99% / 每检出1例需复核 1.7 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
  }
 ]
