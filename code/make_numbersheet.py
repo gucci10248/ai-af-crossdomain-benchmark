@@ -59,17 +59,16 @@ for k, v in res.items():
         add("域内参照/其他", v["dataset"], f"n={v['n']} AUROC {v['auroc']:.3f} Brier {v['brier']:.3f} ECE {v['ece']:.3f} "
             f"Se@Sp90 {v['at_spec90']['sens']:.3f}", "out/results_exp1.json", "run_experiment.py")
 
-# --- 真实患病率下的 PPV/NPV ---
+# --- 真实患病率下的 PPV/NPV（每个操作点只记一行，避免重复）---
 ppv = pd.read_csv(OUT / "table_ppv_npv.csv")
-for _, r in ppv.iterrows():
+for op in ppv["operating_point"].unique():
     for prev in (0.01, 0.05, 0.20):
-        sub = ppv[(ppv["operating_point"] == r["operating_point"]) & (np.isclose(ppv["prevalence"], prev))]
+        sub = ppv[(ppv["operating_point"] == op) & (np.isclose(ppv["prevalence"], prev))]
         if len(sub):
             s = sub.iloc[0]
-            add("PPV/NPV", f"{s['operating_point']} · 患病率{prev:.0%}",
+            add("PPV/NPV", f"{op} · 患病率{prev:.0%}",
                 f"PPV {s['PPV']:.1%} / NPV {s['NPV']:.2%} / 每检出1例需复核 {s['每检出1例需复核阳性例数']:.1f} 例",
                 "out/table_ppv_npv.csv", "ppv_npv.py")
-            break
 
 df = pd.DataFrame(rows)
 json.dump(rows, open(OUT / "numbersheet.json", "w"), ensure_ascii=False, indent=1)
