@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """生成 21 条参考文献的 RIS 文件（供 Zotero 一键导入；Zotero 本地 API 未启用，故不代写库）。
 数据源：07_参考文献清单.md（卷期页已由 PubMed 核验）
-输出：/Users/mac/Desktop/文稿库/人工智能临床应用/参考文献_21条_P2.ris
+输出：/Users/mac/Desktop/文稿库/人工智能临床应用/参考文献_24条_P2.ris
 """
 import pathlib, re
 
@@ -32,6 +32,9 @@ REFS = [
  ("Armoundas AA","Avari Silva JN","Baykaner T","HRS scientific statement on artificial intelligence integration framework into clinical electrophysiology workflows","Heart Rhythm","2026","23","9","e2235-e2250","10.1016/j.hrthm.2026.04.013","JOUR"),
  ("Pundi K","Gandotra C","Sanders W","Considerations for using atrial fibrillation burden as a surrogate endpoint: A report from the Cardiovascular Sciences Research Consortium","Am Heart J","2026","301","","107516","10.1016/j.ahj.2026.107516","JOUR"),
  ("Wachter R","Haag P","Uhe T","Catheter ablation for symptomatic atrial fibrillation (PVI-SHAM-AF): a randomised, double-blind, sham-controlled, multicentre trial","Lancet","2026","408","10559","999-1009","10.1016/S0140-6736(26)01558-8","JOUR"),
+ ("Sang C","Liu Q","Lai Y","Pulmonary Vein Isolation With Optimized Linear Ablation vs Pulmonary Vein Isolation Alone for Persistent AF: The PROMPT-AF Randomized Clinical Trial","JAMA","2025","333","5","381-389","10.1001/jama.2024.24438","JOUR"),
+ ("Zuo S","Zhou L","Feng H","Validation of Smartwatches Integrated With Photoplethysmography for Continuous Evaluation of Atrial Fibrillation Burden","JACC Clin Electrophysiol","2026","","","","10.1016/j.jacep.2026.03.036","JOUR"),
+ ("Wang Z","Li M","Xia P","Screening cognitive impairment in patients with atrial fibrillation: A deep learning model based on retinal fundus photographs","Heart Rhythm O2","2025","6","5","678-686","10.1016/j.hroo.2025.01.019","JOUR"),
  ("Wagner P","Strodthoff N","Bousseljot R","PTB-XL, a large publicly available electrocardiography dataset (version 1.0.3)","PhysioNet","2022","","","","10.13026/kfzx-aw45","DATA"),
  ("Clifford GD","Liu C","Moody B","AF Classification from a Short Single Lead ECG Recording: The PhysioNet/Computing in Cardiology Challenge 2017 (version 1.0.0)","PhysioNet","2017","","","","10.13026/d3hm-sf11","DATA"),
  ("Wang X","Ma C","Zhang X","Paroxysmal Atrial Fibrillation Events Detection from Dynamic ECG Recordings: The 4th China Physiological Signal Challenge 2021 (version 1.0.0)","PhysioNet","2021","","","","10.13026/ksya-qw89","DATA"),
@@ -51,6 +54,6 @@ for (a1, a2, a3, title, journal, year, vol, iss, pages, doi, typ) in REFS:
     lines.append("ER  - ")
     lines.append("")
 
-out = ART / "参考文献_21条_P2.ris"
+out = ART / "参考文献_24条_P2.ris"
 out.write_text("\n".join(lines))
 print("saved:", out, "| 条目数:", len(REFS))
