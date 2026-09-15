@@ -102,6 +102,13 @@ for sec_title, body_text in [("Introduction", intro), ("Methods", methods), ("Re
         else:
             B(d, us(para.replace("`", "")))
 
+H(d, "Data availability", 12)
+B(d, "All data are openly available: PTB-XL v1.0.3 (doi:10.13026/kfzx-aw45), PhysioNet/CinC Challenge 2017 "
+   "(doi:10.13026/d3hm-sf11) and CPSC2021 v1.0.0 (doi:10.13026/ksya-qw89). The analysis code, derived feature "
+   "tables, figure sources and the numeric audit trail are openly available at "
+   "https://github.com/gucci10248/ai-af-crossdomain-benchmark; the archival record of this project is deposited "
+   "at Zenodo (doi:10.5281/zenodo.22764409), and the archived code release corresponding to the final version "
+   "of this manuscript will be updated at revision.")
 H(d, "References", 13)
 for k in sorted(refmap):
     B(d, f"{k}. {refmap[k]}")

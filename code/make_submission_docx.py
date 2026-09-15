@@ -187,9 +187,10 @@ body(d, "None.")
 h(d, "Data availability", 1)
 body(d, "All data are openly available: PTB-XL v1.0.3 (doi:10.13026/kfzx-aw45), PhysioNet/CinC Challenge 2017 "
         "(doi:10.13026/d3hm-sf11) and CPSC2021 v1.0.0 (doi:10.13026/ksya-qw89). Analysis code, derived feature tables, "
-        "figure sources and the numeric audit trail are archived at Zenodo: "
-        "https://doi.org/10.5281/zenodo.22764409 (all versions: 10.5281/zenodo.22764408), "
-        "repository: https://github.com/gucci10248/ai-af-crossdomain-benchmark.")
+        "figure sources and the numeric audit trail are openly available at "
+        "https://github.com/gucci10248/ai-af-crossdomain-benchmark; the archival record of this project is "
+        "deposited at Zenodo (doi:10.5281/zenodo.22764409; all versions: doi:10.5281/zenodo.22764408), and the "
+        "archived code release corresponding to the final version of this manuscript will be updated at revision.")
 
 h(d, "References", 1)
 for k in sorted(refmap):
