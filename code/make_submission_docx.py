@@ -95,15 +95,22 @@ d = base_doc()
 p = d.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
 r = p.add_run(TITLE); r.bold = True; r.font.size = Pt(15)
 p = d.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+p.add_run("Jinkai Guo, MD Candidate; Hua Chen, MD, PhD")
+p = d.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+r = p.add_run("Department of Cardiology, Inner Mongolia Autonomous Region People's Hospital, Hohhot 010017, China")
+r.font.size = Pt(10.5)
+p = d.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+r = p.add_run("ORCID: Jinkai Guo 0009-0000-2455-0486; Hua Chen 0000-0001-9140-5019")
+r.font.size = Pt(10.5)
+p = d.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
 p.add_run("Running title: Cross-device AF detection: calibration collapse")
 p = d.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-p.add_run("[Author 1, Author 2, Author 3 …]  ← 作者顺序与单位待定稿")
+r = p.add_run("Corresponding author: Hua Chen, MD, PhD, Department of Cardiology, Inner Mongolia Autonomous Region "
+              "People's Hospital, Hohhot 010017, China. Email: Zxcv8521@163.com. ORCID: 0000-0001-9140-5019")
+r.font.size = Pt(10.5)
 p = d.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-p.add_run("[Affiliations: Inner Mongolia Autonomous Region People's Hospital; …]")
-p = d.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-p.add_run("Correspondence: [name], [address], [email]")
-p = d.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-p.add_run("Word count (main text, excl. abstract/references): ≈3,100  |  Figures: 5  |  Tables: 5  |  References: 24")
+p.add_run("Word count (main text, excl. abstract/references/table text): \u22483,100  |  Figures: 5  |  Tables: 5  |  "
+          "References: 24  |  Supplementary: Tables S1\u2013S3")
 
 h(d, "Abstract", 1)
 for para in [x.strip() for x in abst_clean.split("\n") if x.strip()]:
@@ -155,6 +162,26 @@ for para in [x.strip() for x in disc.split("\n") if x.strip()]:
         h(d, re.sub(r"^###\s*", "", para), 2)
     else:
         body(d, para)
+
+h(d, "Authors' contributions", 2)
+body(d, "Jinkai Guo: conceptualization; methodology; software and formal analysis (data acquisition, harmonisation, "
+        "benchmark implementation); investigation; writing - original draft. "
+        "Hua Chen: conceptualization; supervision; validation; writing - review and editing; corresponding author. "
+        "Both authors read and approved the final manuscript.")
+
+h(d, "Funding", 2)
+body(d, "None.")
+
+h(d, "Competing interests", 2)
+body(d, "The authors declare no competing interests.")
+
+h(d, "Ethics", 2)
+body(d, "Not applicable. This study used only openly available, de-identified public datasets (PTB-XL, "
+        "PhysioNet/CinC Challenge 2017, CPSC2021); no human participants were recruited and no institutional data "
+        "were accessed.")
+
+h(d, "Acknowledgements", 2)
+body(d, "None.")
 
 h(d, "Data availability", 1)
 body(d, "All data are openly available: PTB-XL v1.0.3 (doi:10.13026/kfzx-aw45), PhysioNet/CinC Challenge 2017 "
