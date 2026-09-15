@@ -133,7 +133,8 @@ callout(d, "[Figure legends: Fig 1 study flow; Fig 2 multi-domain calibration; F
            "Fig 4 forest plot of AUROC and Se@Sp90 with 95% CI; Fig 5 PPV versus prevalence.]")
 callout(d, "[Tables: Table 1 cohort characteristics; Table 2 three-domain discrimination/calibration/operating points; "
            "Table 3 decomposition by negative-class composition; Table 4 recalibration (source-fitted vs target-domain oracle); "
-           "Table 5 subgroups; Table 6 PPV at real-world prevalence.]")
+           "Table 5 PPV/NPV at real-world prevalence. Supplementary Tables S1 (subgroups), S2 (full recalibration), "
+           "S3 (implementation details and cohort accounting).]")
 
 h(d, "Discussion", 1)
 for para in [x.strip() for x in disc.split("\n") if x.strip()]:
