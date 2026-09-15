@@ -1,0 +1,17 @@
+{
+ "records_scanned": 719,
+ "windows": 583,
+ "af_windows": 280,
+ "non_af_windows": 303,
+ "patients": 25,
+ "by_dx": {
+  "nonAF": 264,
+  "persistentAF": 216,
+  "paroxysmalAF": 103
+ },
+ "skipped": {
+  "transition_removed": 130,
+  "over_patient_cap": 83,
+  "no_dat": 612
+ }
+}

@@ -22,7 +22,7 @@ BASE = pathlib.Path("/Users/mac/Desktop/库/公共数据AF")
 OUT = BASE / "out"
 df_p = pd.read_csv(OUT / "feat_ptbxl.csv")
 df_c = pd.read_csv(OUT / "feat_cinc2017.csv")
-feats = [c for c in df_p.columns if c.startswith("f_")]
+feats = sorted([c for c in df_p.columns if c.startswith("f_")])  # 与 run_experiment.py 一致：列序影响 HGB 结果
 
 pats = df_p["patient_id"].unique()
 rng = np.random.RandomState(20260915)

@@ -3,12 +3,13 @@
 
 设计：三块信息，一个结论
   A 判别力 vs 校准：三域的 AUROC 与 ECE 对比（判别力小降、校准大降）
-  B 操作点：固定 90% 特异度下的灵敏度（0.945 → 0.586 → 0.861）
-  C 临床后果：患病率 1% 时的 PPV（本研究外部 2.7% vs 高特异度算法的 66.1%）
+  B 操作点：固定 90% 特异度下的灵敏度（0.945 → 0.586 → 0.871）
+  C 临床后果：患病率 1% 时的 PPV（本研究外部 2.8% vs 高特异度算法的 66.0%）
   底部 Take-home：外部验证要报校准/阴性类构成/操作点；部署需本地重校准 + 特异度目标 + 信号质量门控
-字体：Arial（EHJ 接受 Helvetica/Arial）；数字取自 out/numbersheet.md
+字体：Arial（EHJ 接受 Helvetica/Arial）；数字取自 out/table_domains.csv 与 out/table_ppv_npv.csv（禁止手抄）
 输出：out/graphical_abstract.png
 """
+import csv
 import pathlib
 import numpy as np
 import matplotlib
@@ -23,10 +24,22 @@ plt.rcParams["axes.unicode_minus"] = False
 OUT = pathlib.Path("/Users/mac/Desktop/库/公共数据AF/out")
 C_IN, C_EXT1, C_EXT2 = "#1f77b4", "#d62728", "#2ca02c"
 
+# --- 数字全部从权威结果文件读取 ---
+_dom = {r["domain"]: r for r in csv.DictReader(open(OUT / "table_domains.csv"))}
+_k_in, _k_e1, _k_e2 = ("内部：PTB-XL（德国 12 导联）", "外部 1：CinC2017（消费级单导联）", "外部 2：CPSC2021（中国动态 ECG）")
+auroc = [float(_dom[k]["auroc"]) for k in (_k_in, _k_e1, _k_e2)]
+ece = [float(_dom[k]["ece"]) for k in (_k_in, _k_e1, _k_e2)]
+se90 = [float(_dom[k]["se_at_sp90"]) for k in (_k_in, _k_e1, _k_e2)]
+
+_ppv = list(csv.DictReader(open(OUT / "table_ppv_npv.csv")))
+def _ppv_at(op, prev=0.01):
+    r = next(x for x in _ppv if x["operating_point"] == op and abs(float(x["prevalence"]) - prev) < 1e-9)
+    return float(r["PPV"]) * 100
+ppv = [_ppv_at("本研究 · 外部1 可穿戴（0.5 阈值）"),
+       _ppv_at("本研究 · 外部1 可穿戴（Se@Sp90）"),
+       _ppv_at("对照锚点 · 导师团队 PACE 2024（间期级，消融人群）")]
+
 domains = ["PTB-XL\n(Germany, 12-lead)", "Wearable cohort\n(single-lead)", "CPSC2021\n(China, ambulatory)"]
-auroc = [0.974, 0.886, 0.947]
-ece = [0.064, 0.226, 0.150]
-se90 = [0.945, 0.586, 0.861]
 colors = [C_IN, C_EXT1, C_EXT2]
 
 fig = plt.figure(figsize=(9.2, 12.4), dpi=200)
@@ -48,7 +61,7 @@ for r, v in zip(b1, auroc):
 for r, v in zip(b2, ece):
     ax.text(r.get_x() + r.get_width() / 2, v + 0.02, f"{v:.3f}", ha="center", fontsize=9.5)
 ax.annotate("", xy=(0.83, 0.30), xytext=(1.17, 0.30), arrowprops=dict(arrowstyle="<->", color="#555555", lw=1.2))
-ax.text(1.0, 0.325, "AUROC −0.088\nyet ECE ×3.5", ha="center", fontsize=9, color="#333333")
+ax.text(1.0, 0.325, f"AUROC \u2212{auroc[0]-auroc[1]:.3f}\nyet ECE \u00d7{ece[1]/ece[0]:.1f}", ha="center", fontsize=9, color="#333333")
 ax.set_xticks(x); ax.set_xticklabels(domains, fontsize=9.4)
 ax.set_ylim(0, 1.22); ax.set_ylabel("Metric value", fontsize=9.4)
 ax.set_title("A  Transfer penalty is hidden by AUROC", fontsize=10.6, loc="left", fontweight="bold")
@@ -69,7 +82,6 @@ ax.grid(alpha=0.25, axis="x"); ax.tick_params(labelsize=8.6)
 # --- C: PPV at 1% prevalence ---
 ax = fig.add_subplot(gs[2, :])
 labels = ["This study\nexternal, default 0.5 threshold", "This study\nexternal, Se@Sp90", "Validated algorithm\n99.5% specificity"]
-ppv = [2.7, 5.7, 66.1]
 cols = [C_EXT1, "#9467bd", "#ff7f0e"]
 bars = ax.bar(range(3), ppv, color=cols, width=0.5)
 for i, v in enumerate(ppv):

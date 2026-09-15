@@ -51,6 +51,16 @@ re_ = pd.read_csv(OUT / "table_recal_multidomain.csv")
 for _, r in re_.iterrows():
     add("重校准", f"{r['domain']} · {r['method']}", f"AUROC {r['auroc']:.3f} / Brier {r['brier']:.3f} / ECE {r['ece']:.3f} / Se@Sp90 {r['se_at_sp90']:.3f}",
         "out/table_recal_multidomain.csv", "recalibrate_multi.py")
+# 源域温度参数（正文会引用 T 值，必须入池）
+_recal_json = OUT / "recalibration_results.json"
+if _recal_json.exists():
+    _rj = json.load(open(_recal_json))
+    if "T_source" in _rj:
+        add("重校准", "源域温度 T_source（in-sample 拟合）", round(float(_rj["T_source"]), 4),
+            "out/recalibration_results.json", "recalibrate_multi.py")
+    for _dom, _t in _rj.get("T_target", {}).items():
+        add("重校准", f"{_dom} · 目标域温度 T_target（oracle）", round(float(_t), 4),
+            "out/recalibration_results.json", "recalibrate_multi.py")
 
 # --- 域内参照（results_exp1.json）---
 res = json.load(open(OUT / "results_exp1.json"))

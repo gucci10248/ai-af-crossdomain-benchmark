@@ -76,9 +76,12 @@ with open(OUT / "table_subgroups.csv", newline="") as f:
 table(d, ["Subgroup", "n", "AUROC (95% CI)", "Se@Sp90 (95% CI)", "Brier", "Sp@0.5"], rows)
 
 # ---------------- Table S2 重校准 ----------------
-H(d, "Supplementary Table S2. Post-hoc recalibration in full (monotone transformations leave AUROC unchanged)")
-P(d, "Source-fitted = parameters estimated on a held-out 20% calibration subset of the PTB-XL training patients "
-     "(deployable); oracle = parameters fitted directly on the target domain (upper bound, not deployable). "
+H(d, "Supplementary Table S2. Post-hoc recalibration in full (temperature scaling is strictly monotone and leaves "
+     "AUROC unchanged; isotonic regression may create ties, shifting AUROC by at most 0.008)")
+P(d, "Source-fitted = parameters estimated on out-of-fold predictions from five-fold patient-grouped "
+     "cross-validation within the PTB-XL training data (deployable without target-domain data; the evaluated "
+     "model is always the full-training-set model, so uncalibrated rows match main-text Table 2 exactly); "
+     "oracle = parameters fitted directly on the target domain (upper bound, not deployable). "
      "ECE_eq = expected calibration error with equal-count bins.")
 rows = []
 with open(OUT / "table_recal_multidomain.csv", newline="") as f:
@@ -117,7 +120,10 @@ P(d, f"PTB-XL: 2,400 records sampled (all AFIB/AFLT records plus age-decade- and
      f"1 record could not be read, leaving 2,399 (1,685 training / 714 internal test, patient-level).")
 P(d, f"CinC2017: {len(sub)} records sampled from the official training set with per-class caps "
      f"(A {cnt.get('A', 0)}, N {cnt.get('N', 0)}, O {cnt.get('O', 0)}, ~ {cnt.get('~', 0)}); no patient identifiers available.")
-P(d, f"CPSC2021 set I: {cpsc['records_scanned']} records scanned; signal downloaded for 107 records; "
+P(d, f"CPSC2021 set I: the official release lists 730 records; {730 - cpsc['records_scanned']} records were "
+     f"excluded because the WFDB header could not be parsed into a record-level diagnosis, leaving "
+     f"{cpsc['records_scanned']} records with verified diagnoses (54 patients); signal was downloaded for "
+     f"107 records (bandwidth-bounded, shortest-record-first sampling); "
      f"{cpsc['windows']} non-overlapping 30-second windows from {cpsc['patients']} patients "
      f"(AF {cpsc['af_windows']} / non-AF {cpsc['non_af_windows']}); by record diagnosis: "
      + ", ".join(f"{k} {v}" for k, v in cpsc["by_dx"].items()) +

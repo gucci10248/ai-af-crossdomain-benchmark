@@ -35,7 +35,8 @@ OUT = BASE / "out"
 SEED = 20260915
 
 
-def logit(p, eps=1e-6):
+def logit(p, eps=1e-12):
+    # eps=1e-12：尽量保持严格单调（旧版 1e-6 会把大量接近 1 的概率压成同值，产生并列、拉低 AUROC）
     p = np.clip(p, eps, 1 - eps)
     return np.log(p / (1 - p))
 
@@ -96,23 +97,33 @@ def main():
     df_p = pd.read_csv(OUT / "feat_ptbxl.csv")
     domains = {"CinC2017（消费级可穿戴单导联）": pd.read_csv(OUT / "feat_cinc2017.csv"),
                "CPSC2021（中国动态 ECG 30 秒窗）": pd.read_csv(OUT / "feat_cpsc2021.csv")}
-    feats = [c for c in df_p.columns if c.startswith("f_")]
+    feats = sorted([c for c in df_p.columns if c.startswith("f_")])  # 与 run_experiment.py 一致：列序影响 HGB 结果
 
     pats = df_p["patient_id"].unique()
     rng = np.random.RandomState(SEED); rng.shuffle(pats)
     tr_pats = list(pats[:int(0.7 * len(pats))])
-    rng2 = np.random.RandomState(SEED + 1); rng2.shuffle(tr_pats)
-    n_cal = int(0.2 * len(tr_pats))
-    fit = df_p[df_p["patient_id"].isin(set(tr_pats[n_cal:]))]
-    cal = df_p[df_p["patient_id"].isin(set(tr_pats[:n_cal]))]
+    # 2026-09-15 修复：取消校准留出集（旧版 fit 只用 80% 训练患者 → 与主结果不是同一模型，
+    # 导致本表"未校准"行 AUROC 0.868 与 table_domains 的 0.885 对不上，构成第二次"数字双源"）。
+    # 现改为：模型用全部训练患者（与 run_experiment 完全一致），源域温度/等渗在训练集上
+    # in-sample 拟合。in-sample 只会让源域校准则更乐观，而本文结论是"即使这样也无法迁移"，
+    # 结论方向不变且表述更强。
+    fit = df_p[df_p["patient_id"].isin(set(tr_pats))]
     te = df_p[~df_p["patient_id"].isin(set(tr_pats))]
     mdl = make_pipeline(SimpleImputer(strategy="median"),
                         HistGradientBoostingClassifier(max_iter=300, learning_rate=0.06, random_state=0))
     mdl.fit(fit[feats], fit["label"])
-    p_cal = mdl.predict_proba(cal[feats])[:, 1]
-    T_src = fit_temperature(p_cal, cal["label"].values)
-    iso_src = IsotonicRegression(out_of_bounds="clip").fit(p_cal, cal["label"].values)
-    print(f"源域校准温度 T={T_src:.2f}（>1 表示源域也偏保守/分布不同）")
+    # 源域校准器用训练集 5 折患者级交叉预测（out-of-fold）拟合——诚实的源域校准，
+    # 且最终评估模型就是全训练集模型 → 本表"未校准"行与 run_experiment/table_domains 逐位一致。
+    from sklearn.model_selection import GroupKFold
+    p_cv = np.zeros(len(fit))
+    for _tr, _va in GroupKFold(n_splits=5).split(fit[feats], fit["label"], groups=fit["patient_id"].values):
+        m_cv = make_pipeline(SimpleImputer(strategy="median"),
+                             HistGradientBoostingClassifier(max_iter=300, learning_rate=0.06, random_state=0))
+        m_cv.fit(fit[feats].iloc[_tr], fit["label"].iloc[_tr])
+        p_cv[_va] = m_cv.predict_proba(fit[feats].iloc[_va])[:, 1]
+    T_src = fit_temperature(p_cv, fit["label"].values)
+    iso_src = IsotonicRegression(out_of_bounds="clip").fit(p_cv, fit["label"].values)
+    print(f"源域校准温度 T={T_src:.2f}（训练集 5 折 OOF 拟合；>1 表示源域概率偏极端）")
 
     rows = [row(te["label"].values, mdl.predict_proba(te[feats])[:, 1], "内部验证（源域测试集）", "源域 PTB-XL", "未校准")]
     fig_data = {}
@@ -138,7 +149,8 @@ def main():
 
     tbl = pd.DataFrame(rows)
     tbl.to_csv(OUT / "table_recal_multidomain.csv", index=False)
-    json.dump({"rows": rows, "T_source": T_src},
+    json.dump({"rows": rows, "T_source": T_src,
+               "T_target": {d: float(fd["T_tgt"]) for d, fd in fig_data.items()}},
               open(OUT / "recalibration_results.json", "w"), indent=1, ensure_ascii=False)
 
     fig, axes = plt.subplots(1, 2, figsize=(13, 5))

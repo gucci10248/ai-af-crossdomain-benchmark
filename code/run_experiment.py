@@ -137,10 +137,8 @@ def evaluate(y, p, name, meta=None):
 
     res["at_0.5"] = at(0.5)
     # 阈值取到"特异度≈90%"的操作点（筛查场景常用）
-    order = np.argsort(-p)
-    y_sorted = y[order]
-    tn_total = int((y == 0).sum())
-    thr90 = p[order][min(len(p) - 1, max(0, np.searchsorted(np.cumsum(y_sorted == 0), 0.10 * tn_total)))] if tn_total else 0.5
+    neg_scores = p[y == 0]
+    thr90 = float(np.quantile(neg_scores, 0.90)) if len(neg_scores) else 0.5
     res["at_spec90"] = at(thr90)
     if meta is not None:
         sub = {}

@@ -8,7 +8,7 @@
 
 注意：温度缩放/等渗回归都是单调变换，**AUROC 不变**——这本身就是要写的结论：
       "校准改善不改变排序能力，但改变可用性"。
-输出：out/recalibration_results.json, out/table_recal.csv, out/fig3_recalibration_netbenefit.png
+输出：out/recalibration_dca.json, out/table_recal.csv, out/fig3_recalibration_netbenefit.png
 """
 import json, pathlib, sys
 import numpy as np
@@ -39,7 +39,7 @@ OUT = BASE / "out"
 SEED = 20260915
 
 
-def logit(p, eps=1e-6):
+def logit(p, eps=1e-12):  # 尽量保持严格单调（1e-6 截断会制造并列、拉低 AUROC）
     p = np.clip(p, eps, 1 - eps)
     return np.log(p / (1 - p))
 
@@ -135,40 +135,44 @@ def metrics(y, p, tag):
 def main():
     df_p = pd.read_csv(OUT / "feat_ptbxl.csv")
     df_c = pd.read_csv(OUT / "feat_cinc2017.csv")
-    feats = [c for c in df_p.columns if c.startswith("f_")]
+    feats = sorted([c for c in df_p.columns if c.startswith("f_")])  # 与 run_experiment.py 一致：列序影响 HGB 结果
     print(f"PTB-XL n={len(df_p)}  CinC2017 n={len(df_c)}  features={len(feats)}")
 
-    # 患者级：训练 / 测试 / 校准（校准集从训练患者里再切 20%）
+    # 患者级：训练 / 测试（2026-09-15 修复：取消校准留出集，与主结果共用同一模型；
+    # 源域温度/等渗在完整训练集上 in-sample 拟合，见 recalibrate_multi.py 同源注释）
     pats = df_p["patient_id"].unique()
     rng = np.random.RandomState(SEED)
     rng.shuffle(pats)
     n_tr = int(0.7 * len(pats))
     tr_pats = pats[:n_tr]
-    rng2 = np.random.RandomState(SEED + 1)
-    rng2.shuffle(tr_pats)
-    n_cal = int(0.2 * len(tr_pats))
-    cal_pats, fit_pats = set(tr_pats[:n_cal]), set(tr_pats[n_cal:])
-    fit = df_p[df_p["patient_id"].isin(fit_pats)]
-    cal = df_p[df_p["patient_id"].isin(cal_pats)]
+    fit = df_p[df_p["patient_id"].isin(set(tr_pats))]
     te = df_p[~df_p["patient_id"].isin(set(tr_pats))]
-    print(f"fit={len(fit)} cal={len(cal)} internal-test={len(te)} external={len(df_c)}")
+    print(f"fit={len(fit)} internal-test={len(te)} external={len(df_c)}（校准器用训练集 5 折 OOF 拟合）")
 
     results = {}
     fig_data = {}
+    from sklearn.base import clone
+    from sklearn.model_selection import GroupKFold
     for name, mdl in {
-        "hgb": make_pipeline(HistGradientBoostingClassifier(max_iter=300, learning_rate=0.06, random_state=0)),
+        "hgb": make_pipeline(SimpleImputer(strategy="median"),
+                             HistGradientBoostingClassifier(max_iter=300, learning_rate=0.06, random_state=0)),
         "logreg": make_pipeline(SimpleImputer(strategy="median"), StandardScaler(),
                                 LogisticRegression(max_iter=2000, class_weight="balanced")),
     }.items():
         mdl.fit(fit[feats], fit["label"])
-        p_cal = mdl.predict_proba(cal[feats])[:, 1]
+        # 源域校准器：训练集 5 折患者级 OOF 预测（与 recalibrate_multi.py 同口径）
+        p_cv = np.zeros(len(fit))
+        for _tr, _va in GroupKFold(n_splits=5).split(fit[feats], fit["label"], groups=fit["patient_id"].values):
+            m_cv = clone(mdl)
+            m_cv.fit(fit[feats].iloc[_tr], fit["label"].iloc[_tr])
+            p_cv[_va] = m_cv.predict_proba(fit[feats].iloc[_va])[:, 1]
         p_in = mdl.predict_proba(te[feats])[:, 1]
         p_ex = mdl.predict_proba(df_c[feats])[:, 1]
         y_in, y_ex = te["label"].values, df_c["label"].values
 
-        T_src = fit_temperature(p_cal, cal["label"].values)          # 源域校准（可迁移）
+        T_src = fit_temperature(p_cv, fit["label"].values)          # 源域校准（可迁移）
         T_tgt = fit_temperature(p_ex, y_ex)                          # 目标域校准（oracle 上界）
-        iso_src = IsotonicRegression(out_of_bounds="clip").fit(p_cal, cal["label"].values)
+        iso_src = IsotonicRegression(out_of_bounds="clip").fit(p_cv, fit["label"].values)
         iso_tgt = IsotonicRegression(out_of_bounds="clip").fit(p_ex, y_ex)
 
         rows = [
@@ -202,7 +206,8 @@ def main():
 
     pd.DataFrame([v for k, v in results.items() if isinstance(v, dict) and "auroc" in v]) \
         .to_csv(OUT / "table_recal.csv", index=False)
-    json.dump(results, open(OUT / "recalibration_results.json", "w"), indent=1, ensure_ascii=False)
+    # 2026-09-15：改名以避免与 recalibrate_multi.py 的 recalibration_results.json 互相覆盖
+    json.dump(results, open(OUT / "recalibration_dca.json", "w"), indent=1, ensure_ascii=False)
 
     # ---- 图 3：左=重校准前后可靠性曲线；右=决策曲线 ----
     fig, axes = plt.subplots(1, 2, figsize=(13, 5))

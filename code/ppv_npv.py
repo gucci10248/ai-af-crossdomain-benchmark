@@ -28,14 +28,28 @@ except Exception:
 BASE = pathlib.Path("/Users/mac/Desktop/库/公共数据AF")
 OUT = BASE / "out"
 
-# --- 操作点（Se, Sp, 来源） ---
+# --- 操作点（Se, Sp）：全部从权威结果文件动态读取，禁止手抄 ---
+# 2026-09-15 修复：旧版此处硬编码了上一轮的运行值（0.940/0.941/0.596/0.877/0.199/0.861），
+# 与重跑后的权威数字（table_domains / table_ci / results_exp1）系统性漂移，正是交接书警告的"手抄数字"。
+import json
+
+_dom = pd.read_csv(OUT / "table_domains.csv").set_index("domain")
+_ci = pd.read_csv(OUT / "table_ci.csv")
+_ci_sub = _ci.set_index("group")
+_exp1 = json.load(open(OUT / "results_exp1.json"))
+
+DOM_INT = "内部：PTB-XL（德国 12 导联）"
+DOM_EXT1 = "外部 1：CinC2017（消费级单导联）"
+DOM_EXT2 = "外部 2：CPSC2021（中国动态 ECG）"
+_at05 = _exp1["cinc2017_external_from_hgb"]["at_0.5"]
+
 OPS = [
-    ("本研究 · 内部验证（PTB-XL，Se@Sp90）", 0.940, 0.900, "out/table_domains.csv"),
-    ("本研究 · 外部1 可穿戴（0.5 阈值）", 0.941, 0.663, "out/table_domains.csv"),
-    ("本研究 · 外部1 可穿戴（Se@Sp90）", 0.596, 0.900, "out/table_domains.csv"),
-    ("本研究 · 外部1 严格 A vs N（Se@Sp90）", 0.877, 0.900, "out/table_ci.csv"),
-    ("本研究 · 外部1 A vs 噪声（Se@Sp90）", 0.199, 0.900, "out/table_ci.csv"),
-    ("本研究 · 中国域 CPSC2021（Se@Sp90）", 0.861, 0.900, "out/table_ci.csv"),
+    ("本研究 · 内部验证（PTB-XL，Se@Sp90）", float(_dom.loc[DOM_INT, "se_at_sp90"]), 0.900, "out/table_domains.csv"),
+    ("本研究 · 外部1 可穿戴（0.5 阈值）", float(_at05["sens"]), float(_at05["spec"]), "out/results_exp1.json"),
+    ("本研究 · 外部1 可穿戴（Se@Sp90）", float(_dom.loc[DOM_EXT1, "se_at_sp90"]), 0.900, "out/table_domains.csv"),
+    ("本研究 · 外部1 严格 A vs N（Se@Sp90）", float(_ci_sub.loc["外部1a：仅 A vs N", "Se@Sp90"]), 0.900, "out/table_ci.csv"),
+    ("本研究 · 外部1 A vs 噪声（Se@Sp90）", float(_ci_sub.loc["外部1c：A vs 噪声(~)", "Se@Sp90"]), 0.900, "out/table_ci.csv"),
+    ("本研究 · 中国域 CPSC2021（Se@Sp90）", float(_dom.loc[DOM_EXT2, "se_at_sp90"]), 0.900, "out/table_domains.csv"),
     ("对照锚点 · 导师团队 PACE 2024（间期级，消融人群）", 0.963, 0.995, "PACE 2024;47(4):511-517"),
     ("对照锚点 · 导师团队 Adv Sci 2026（双模态校正后）", 0.986, 0.9927, "Advanced Science 2026"),
     ("对照锚点 · 导师团队 JACC Clin EP 2026（间期级，728 例前瞻）", 0.9870, 0.9956, "JACC Clin Electrophysiol 2026; PMID 42283663"),
@@ -81,8 +95,8 @@ for p in (0.01, 0.05, 0.20):
 md.append("## 结论要点")
 md.append("1. 患病率 1% 时：特异度 90%（哪怕灵敏度 94%）只有 **约 9% 的 PPV**——每 11 个阳性里 10 个是假阳性；")
 md.append("   而特异度 99.5% 可以把 PPV 抬到 **约 66%**。**筛查场景的真正瓶颈是特异度，不是灵敏度。**")
-md.append("2. 本研究外部域在 0.5 固定阈值下特异度仅 0.663 → 低患病率下 PPV 不足 3%，说明跨设备沿用默认阈值会制造海量假阳性。")
-md.append("3. 反过来，在中国动态 ECG 域（Se@Sp90 = 0.861）与内部验证水平接近，说明**校准/阈值本地化之后筛查是可行的**。")
+md.append(f"2. 本研究外部域在 0.5 固定阈值下特异度仅 {_at05['spec']:.3f} → 低患病率下 PPV 不足 3%，说明跨设备沿用默认阈值会制造海量假阳性。")
+md.append(f"3. 反过来，在中国动态 ECG 域（Se@Sp90 = {_dom.loc[DOM_EXT2, 'se_at_sp90']:.3f}）与内部验证水平接近，说明**校准/阈值本地化之后筛查是可行的**。")
 (OUT / "table_ppv_npv.md").write_text("\n".join(md) + "\n")
 
 # --- 图：PPV 随患病率变化 ---
