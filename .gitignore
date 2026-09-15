@@ -1,0 +1,5 @@
+data/
+*.part
+__pycache__/
+*.pyc
+submission/.DS_Store

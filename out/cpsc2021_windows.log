@@ -1,0 +1,21 @@
+records with .hea: 719
+  100/719 | windows=216 | {'transition_removed': 0, 'over_patient_cap': 41, 'no_dat': 56}
+  150/719 | windows=288 | {'transition_removed': 0, 'over_patient_cap': 47, 'no_dat': 97}
+  700/719 | windows=569 | {'transition_removed': 130, 'over_patient_cap': 82, 'no_dat': 595}
+{
+ "records_scanned": 719,
+ "windows": 583,
+ "af_windows": 280,
+ "non_af_windows": 303,
+ "patients": 25,
+ "by_dx": {
+  "nonAF": 264,
+  "persistentAF": 216,
+  "paroxysmalAF": 103
+ },
+ "skipped": {
+  "transition_removed": 130,
+  "over_patient_cap": 83,
+  "no_dat": 612
+ }
+}
