@@ -1,6 +1,6 @@
 # 权威数字表（写作时只从此处取数）
 
-生成时间：见文件 mtime ｜ 共 114 条 ｜ 来源：out/*.csv|json（均为脚本真实运行输出）
+生成时间：见文件 mtime ｜ 共 120 条 ｜ 来源：out/*.csv|json（均为脚本真实运行输出）
 
 ## 数据
 
@@ -150,4 +150,10 @@
 | 对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率1% | PPV 57.7% / NPV 99.99% / 每检出1例需复核 1.7 例 | out/table_ppv_npv.csv | ppv_npv.py |
 | 对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率5% | PPV 87.7% / NPV 99.93% / 每检出1例需复核 1.1 例 | out/table_ppv_npv.csv | ppv_npv.py |
 | 对照锚点 · 导师团队 Adv Sci 2026（双模态校正后） · 患病率20% | PPV 97.1% / NPV 99.65% / 每检出1例需复核 1.0 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 JACC Clin EP 2026（间期级，728 例前瞻） · 患病率1% | PPV 69.4% / NPV 99.99% / 每检出1例需复核 1.4 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 JACC Clin EP 2026（间期级，728 例前瞻） · 患病率5% | PPV 92.2% / NPV 99.93% / 每检出1例需复核 1.1 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 JACC Clin EP 2026（间期级，728 例前瞻） · 患病率20% | PPV 98.2% / NPV 99.67% / 每检出1例需复核 1.0 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 Heart Rhythm O2 2025（眼底 DL 外验 AUROC 0.773） · 患病率1% | PPV 7.2% / NPV 99.75% / 每检出1例需复核 13.8 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 Heart Rhythm O2 2025（眼底 DL 外验 AUROC 0.773） · 患病率5% | PPV 28.9% / NPV 98.69% / 每检出1例需复核 3.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+| 对照锚点 · 导师团队 Heart Rhythm O2 2025（眼底 DL 外验 AUROC 0.773） · 患病率20% | PPV 65.9% / NPV 94.07% / 每检出1例需复核 1.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
 

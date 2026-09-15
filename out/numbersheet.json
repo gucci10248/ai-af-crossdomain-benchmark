@@ -796,5 +796,47 @@
   "value": "PPV 97.1% / NPV 99.65% / 每检出1例需复核 1.0 例",
   "source": "out/table_ppv_npv.csv",
   "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 JACC Clin EP 2026（间期级，728 例前瞻） · 患病率1%",
+  "value": "PPV 69.4% / NPV 99.99% / 每检出1例需复核 1.4 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 JACC Clin EP 2026（间期级，728 例前瞻） · 患病率5%",
+  "value": "PPV 92.2% / NPV 99.93% / 每检出1例需复核 1.1 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 JACC Clin EP 2026（间期级，728 例前瞻） · 患病率20%",
+  "value": "PPV 98.2% / NPV 99.67% / 每检出1例需复核 1.0 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 Heart Rhythm O2 2025（眼底 DL 外验 AUROC 0.773） · 患病率1%",
+  "value": "PPV 7.2% / NPV 99.75% / 每检出1例需复核 13.8 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 Heart Rhythm O2 2025（眼底 DL 外验 AUROC 0.773） · 患病率5%",
+  "value": "PPV 28.9% / NPV 98.69% / 每检出1例需复核 3.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
+ },
+ {
+  "section": "PPV/NPV",
+  "key": "对照锚点 · 导师团队 Heart Rhythm O2 2025（眼底 DL 外验 AUROC 0.773） · 患病率20%",
+  "value": "PPV 65.9% / NPV 94.07% / 每检出1例需复核 1.5 例",
+  "source": "out/table_ppv_npv.csv",
+  "script": "ppv_npv.py"
  }
 ]

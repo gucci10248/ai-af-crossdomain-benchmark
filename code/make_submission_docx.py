@@ -76,10 +76,10 @@ results = section_slice(md6, "## RESULTS（英文正稿）", "## DISCUSSION（�
 disc = section_slice(md6, "## DISCUSSION（英文正稿）", "## 中文工作注")
 
 # --- 摘要：取 08 第三节 ---
-abst = section_slice(md8, "## 三、文字摘要（≤250 词，无缩写、无参考文献）", "## 四、关键词（6 个）")
+abst = section_slice(md8, "## 三、文字摘要（最终稿，带小标题；Europace 要求 text abstract with headings）", "## 四、What's New?")
 abst_clean = re.sub(r"\n?（\*\*.*?）\n?", "", abst, flags=re.S).strip()
-kw_line = section_slice(md8, "## 四、关键词（6 个）", "## 五、封面信")
-keywords = kw_line.strip().splitlines()[0].strip()
+kw_m = re.search(r"^Keywords:\s*(.+)$", md8, re.M)
+keywords = kw_m.group(1).strip()
 
 # --- 参考文献：解析 07 的两张表 ---
 refs = []
@@ -88,7 +88,7 @@ for m in re.finditer(r"^\|\s*(\d+)\s*\|\s*(.+?)\s*\|\s*([^|]*)\|\s*$", md7, re.M
     if cite.startswith("完整著录") or cite.startswith("---"):
         continue
     refs.append(cite)
-refs = refs[:21]
+refs = refs[:24]
 
 # ============ 正文文件 ============
 d = base_doc()
@@ -103,13 +103,26 @@ p.add_run("[Affiliations: Inner Mongolia Autonomous Region People's Hospital; �
 p = d.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
 p.add_run("Correspondence: [name], [address], [email]")
 p = d.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-p.add_run("Word count (main text, excl. abstract/references): ≈3,100  |  Figures: 5  |  Tables: 6  |  References: 21")
+p.add_run("Word count (main text, excl. abstract/references): ≈3,100  |  Figures: 5  |  Tables: 5  |  References: 24")
 
 h(d, "Abstract", 1)
 for para in [x.strip() for x in abst_clean.split("\n") if x.strip()]:
     body(d, para)
 body(d, f"Keywords: {keywords}")
 callout(d, "[Graphical abstract submitted as a separate file: graphical_abstract.png]")
+callout(d, "[Target journal: Europace (SCIE; IF 10.2, JCR 17/237). Additional What's New? box required - see below.]")
+
+WHATS_NEW = [
+ "Discrimination barely changed across devices (AUROC 0.974 internally versus 0.886 in a consumer wearable cohort), while calibration error tripled and sensitivity at 90% specificity fell from 0.940 to 0.596.",
+ "Transfer to a Chinese ambulatory cohort was substantially better (AUROC 0.947), indicating that acquisition and device shift, rather than population shift, dominates the loss.",
+ "Most false positives originated from noisy segments (AF versus noise: AUROC 0.646; sensitivity at 90% specificity 0.199), not from other rhythms or population differences.",
+ "Source-fitted recalibration transferred poorly, and no post-hoc monotone method improved discrimination.",
+ "At 1% prevalence the cross-device operating point implies a positive predictive value of 2.7%, versus 66-69% for algorithms validated at 99.5% specificity or above.",
+]
+h(d, "What's New?", 2)
+for b in WHATS_NEW:
+    p = d.add_paragraph(style="List Bullet")
+    p.add_run(b).font.size = Pt(11)
 
 h(d, "Introduction", 1)
 for para in [x.strip() for x in intro.split("\n") if x.strip()]:
@@ -146,7 +159,9 @@ for para in [x.strip() for x in disc.split("\n") if x.strip()]:
 h(d, "Data availability", 1)
 body(d, "All data are openly available: PTB-XL v1.0.3 (doi:10.13026/kfzx-aw45), PhysioNet/CinC Challenge 2017 "
         "(doi:10.13026/d3hm-sf11) and CPSC2021 v1.0.0 (doi:10.13026/ksya-qw89). Analysis code, derived feature tables, "
-        "figure sources and the numeric audit trail are available at [GitHub URL] and archived at [Zenodo DOI].")
+        "figure sources and the numeric audit trail are archived at Zenodo: "
+        "https://doi.org/10.5281/zenodo.22764409 (all versions: 10.5281/zenodo.22764408), "
+        "repository: https://github.com/gucci10248/ai-af-crossdomain-benchmark.")
 
 h(d, "References", 1)
 for i, cite in enumerate(refs, 1):
