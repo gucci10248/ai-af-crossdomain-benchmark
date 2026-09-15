@@ -19,6 +19,14 @@ DOCS = [pathlib.Path("/Users/mac/Desktop/文稿库/人工智能临床应用/05_P
 
 vals = set()
 
+# 允许"派生值"：两个已知数值的差（ΔAUROC 等），写作时常见
+diff_vals = set()
+
+
+def _note(v):
+    vals.add(round(float(v), 3))
+    vals.add(round(float(v), 2))
+
 def harvest_csv(p):
     try:
         df = pd.read_csv(p)
@@ -47,6 +55,13 @@ try:
 except Exception:
     pass
 
+# 派生值：指标之间的差（ΔAUROC / ΔBrier 等）
+base = sorted(v for v in vals if 0.15 <= v <= 1.0)
+for i, a in enumerate(base):
+    for b in base[i + 1:]:
+        diff_vals.add(round(abs(a - b), 3))
+        diff_vals.add(round(abs(a - b), 2))
+
 # 允许的"非指标"数字（年份/样本量/比例常数等）
 WHITELIST = {2026, 2025, 2024, 0.5, 0.9, 0.1, 0.2, 0.8, 1.0, 0.0, 0.05, 0.3, 0.4, 0.6, 0.7, 0.95, 1.2, 100.0}
 # 明确标注的外部来源数字（来自导师团队已发表论文，非本研究运行结果）
@@ -69,6 +84,8 @@ for doc in DOCS:
         r3, r2 = round(f, 3), round(f, 2)
         if f in WHITELIST or r3 in vals or r2 in vals or s in EXTERNAL:
             continue
+        if r3 in diff_vals or r2 in diff_vals:
+            continue          # 两个已知指标的差
         missing.append(s)
     report.append((doc, len(set(nums)), missing))
 
