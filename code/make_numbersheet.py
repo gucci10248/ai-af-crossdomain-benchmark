@@ -88,6 +88,14 @@ if _rob.exists():
             f"seed0 {_r['seed0']:.4f} / 均值 {_r['mean']:.4f}±{_r['sd']:.4f} / 范围 {_r['min']:.4f}–{_r['max']:.4f}",
             "out_robustness/robustness_summary.csv", "aggregate_robustness.py")
 
+# 保证 (section, key) 全局唯一，防止同一数字被重复登记导致审计/替换歧义
+_seen = set()
+for r in rows:
+    _k = (r["section"], r["key"])
+    if _k in _seen:
+        raise ValueError(f"numbersheet 重复条目: {_k}")
+    _seen.add(_k)
+
 df = pd.DataFrame(rows)
 json.dump(rows, open(OUT / "numbersheet.json", "w"), ensure_ascii=False, indent=1)
 

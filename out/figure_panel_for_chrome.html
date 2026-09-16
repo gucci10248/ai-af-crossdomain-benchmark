@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>P2 Manuscript Figure Panel</title>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background: #fff; color: #222; }
+  h1 { font-size: 18px; margin-bottom: 8px; }
+  .meta { font-size: 12px; color: #666; margin-bottom: 24px; }
+  figure { margin: 32px 0; page-break-inside: avoid; }
+  figcaption { font-size: 11px; line-height: 1.5; margin-top: 8px; color: #333; }
+  img { max-width: 100%; height: auto; border: 1px solid #ddd; }
+  .label { font-weight: bold; }
+</style>
+</head>
+<body>
+<h1>P2 Manuscript Figures — Chrome Review Panel</h1>
+<p class="meta">
+Journal-ready PNG files (600 dpi source, colour-blind-safe Okabe–Ito palette).<br>
+Generated: 2026-09-16 | Project: /Users/mac/Desktop/库/公共数据AF
+</p>
+
+<figure>
+  <img src="fig1_flow.png" alt="Figure 1">
+  <figcaption><span class="label">Figure 1.</span> Study flow and cohort provenance. Three openly available cohorts were harmonised onto one 30-second, single-lead, segment-level AF-versus-non-AF task. PTB-XL was used for model development and internal testing with patient-level partitioning; CinC2017 and CPSC2021 were used only for external evaluation.</figcaption>
+</figure>
+
+<figure>
+  <img src="fig2_multidomain_calibration.png" alt="Figure 2">
+  <figcaption><span class="label">Figure 2.</span> Multi-domain performance. Left: reliability (calibration) curves for the internal and both external cohorts. Middle: distributions of predicted probabilities by true class. Right: discrimination (AUROC), calibration error (Brier) and sensitivity at 90% specificity across the three domains, showing that discrimination decays modestly whereas calibration and operating-point behaviour degrade sharply on the wearable cohort.</figcaption>
+</figure>
+
+<figure>
+  <img src="fig3_recalibration_multidomain.png" alt="Figure 3">
+  <figcaption><span class="label">Figure 3.</span> Recalibration and clinical usefulness. Left: reliability before and after source-fitted and target-domain (oracle) temperature scaling and isotonic regression. Right: decision curves comparing uncalibrated, source-fitted and target-domain calibrated predictions against the strategies of treating none or all as positive. Monotone recalibration repairs probabilities but leaves discrimination essentially unchanged.</figcaption>
+</figure>
+
+<figure>
+  <img src="fig4_forest.png" alt="Figure 4">
+  <figcaption><span class="label">Figure 4.</span> Forest plot of AUROC and sensitivity at 90% specificity across domains, negative-class definitions and pre-specified subgroups, with 95% confidence intervals (cluster bootstrap, B = 1,000).</figcaption>
+</figure>
+
+<figure>
+  <img src="fig5_ppv_npv.png" alt="Figure 5">
+  <figcaption><span class="label">Figure 5.</span> Positive predictive value versus prevalence for each measured operating point; a previously validated high-specificity smartwatch algorithm is shown for reference. At community-screening prevalence (~1%), cross-device loss of specificity collapses PPV, whereas algorithms maintained above 99% specificity remain clinically interpretable.</figcaption>
+</figure>
+
+</body>
+</html>

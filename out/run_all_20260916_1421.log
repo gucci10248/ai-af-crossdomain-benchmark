@@ -1,0 +1,253 @@
+============================================
+P2 完整分析链重跑
+REUSE_FEATURES=1 | SEED=0 | OUT_DIR=/Users/mac/Desktop/库/公共数据AF/out
+============================================
+[1/9] run_experiment.py
+== 读取 PTB-XL 子集 ==
+  loaded: 2399
+== 读取 CinC2017 子集 ==
+  loaded: 2537
+== 特征提取 ==
+  复用 PTB-XL 缓存特征: 2399
+  复用 CinC2017 缓存特征: 2537
+  CPSC2021 窗级特征已载入: 583 窗 / 25 位患者 / 阳性窗 280
+  n features: 31
+  PTB-XL patient-level split: train 1685 recs / test 714 recs
+  [logreg] AUROC=0.950 AUPRC=0.918 Brier=0.075 ECE=0.037
+  [logreg] EXTERNAL CinC2017 AUROC=0.789 Sens=0.984 Spec=0.094 Brier=0.588
+  [logreg] EXTERNAL strict(A vs N) n=1758 AUROC=0.839 Sens=0.984 Spec=0.093
+  [logreg] CinC2017 in-domain 5-fold AUROC=0.952
+  [hgb] AUROC=0.974 AUPRC=0.972 Brier=0.069 ECE=0.065
+  [hgb] EXTERNAL CinC2017 AUROC=0.885 Sens=0.941 Spec=0.672 Brier=0.221
+  [hgb] EXTERNAL strict(A vs N) n=1758 AUROC=0.948 Sens=0.941 Spec=0.833
+  [hgb] CinC2017 in-domain 5-fold AUROC=0.952
+  [logreg] EXTERNAL CPSC2021(中国) n=583 AUROC=0.904 Brier=0.449 ECE=0.476 Se=1.000 Sp=0.040
+  [hgb] EXTERNAL CPSC2021(中国) n=583 AUROC=0.946 Brier=0.128 ECE=0.143 Se=1.000 Sp=0.729
+  [hgb] CPSC2021 域内(按患者分组5折) AUROC=0.923 Brier=0.136 ECE=0.126
+  top features: f_rr_cv(0.023), f_rr_iqr(0.013), f_sampen(0.008), f_rr_mean(0.005), f_rr_skew(0.005), f_pnn50(0.004), f_rr_median(0.004), f_sd1_sd2(0.003)
+
+== 汇总 ==
+                            key                                                   dataset    n    auroc    auprc    brier      ece  sens@0.5  spec@0.5  sens@spec90
+          ptbxl_internal_logreg                                  PTB-XL internal (logreg)  714 0.949766 0.917632 0.075317 0.037338  0.939726  0.859599     0.846575
+  cinc2017_external_from_logreg              CinC2017 external (trained on PTB-XL/logreg) 2537 0.788560 0.599795 0.587909 0.613299  0.984169  0.094435     0.398417
+cinc2017_external_strict_logreg CinC2017 external AF-vs-N only (trained on PTB-XL/logreg) 1758 0.838906 0.804491 0.470604 0.491143  0.984169  0.093000     0.576517
+        cinc2017_internal_5fold            CinC2017 internal 5-fold (in-domain reference) 2537 0.952283 0.910831 0.085882 0.072089  0.792876  0.939292     0.865435
+             ptbxl_internal_hgb                                     PTB-XL internal (hgb)  714 0.974400 0.971970 0.069266 0.064924  0.953425  0.879656     0.945205
+     cinc2017_external_from_hgb                 CinC2017 external (trained on PTB-XL/hgb) 2537 0.885496 0.701484 0.220735 0.225398  0.940633  0.671726     0.585752
+   cinc2017_external_strict_hgb    CinC2017 external AF-vs-N only (trained on PTB-XL/hgb) 1758 0.947503 0.905009 0.104007 0.098290  0.940633  0.833000     0.890501
+       cpsc2021_external_logreg       CPSC2021 external (China, trained on PTB-XL/logreg)  583 0.904455 0.837909 0.449234 0.476304  1.000000  0.039604     0.607143
+          cpsc2021_external_hgb          CPSC2021 external (China, trained on PTB-XL/hgb)  583 0.946146 0.891792 0.128084 0.143260  1.000000  0.729373     0.871429
+        cpsc2021_internal_5fold            CPSC2021 in-domain 5-fold (grouped by patient)  583 0.923232 0.916858 0.135657 0.126250  0.892857  0.811881     0.785714
+
+结果已写入: /Users/mac/Desktop/库/公共数据AF/out
+[2/9] make_figures_multidomain.py
+                 domain    n  pos    auroc    auprc    brier      ece   ece_eq  mean_pred  observed  se_at_sp90
+    内部：PTB-XL（德国 12 导联）  714  365 0.974400 0.971970 0.069266 0.064924 0.051419   0.549093  0.511204    0.945205
+  外部 1：CinC2017（消费级单导联） 2537  758 0.885496 0.701484 0.220735 0.225398 0.226494   0.514499  0.298778    0.585752
+外部 2：CPSC2021（中国动态 ECG）  583  280 0.946146 0.891792 0.128084 0.143260 0.143260   0.623534  0.480274    0.871429
+saved: /Users/mac/Desktop/库/公共数据AF/out/fig2_multidomain_calibration.png
+[3/9] make_figures.py
+saved: /Users/mac/Desktop/库/公共数据AF/out/fig1_calibration_shift.png
+internal AUROC=0.9744 Brier=0.0693
+external AUROC=0.8855 Brier=0.2207
+[4/9] subgroups_ci.py
+内部：PTB-XL（德国12导）                   n=  714 AUROC=0.974[0.964,0.983] Se@Sp90=0.945[0.899,0.974] Brier=0.069 Sp@0.5=0.880
+外部1：CinC2017 全部（A vs 非A）           n= 2537 AUROC=0.885[0.872,0.897] Se@Sp90=0.586[0.522,0.643] Brier=0.221 Sp@0.5=0.672
+外部2：CPSC2021（中国，30秒窗）              n=  583 AUROC=0.946[0.886,0.991] Se@Sp90=0.871[0.551,1.000] Brier=0.128 Sp@0.5=0.729
+外部1a：仅 A vs N                      n= 1758 AUROC=0.948[0.937,0.958] Se@Sp90=0.891[0.845,0.920] Brier=0.104 Sp@0.5=0.833
+外部1b：A vs O（其他节律）                  n= 1258 AUROC=0.904[0.885,0.922] Se@Sp90=0.735[0.652,0.808] Brier=0.153 Sp@0.5=0.638
+外部1c：A vs 噪声(~)                    n= 1037 AUROC=0.630[0.594,0.673] Se@Sp90=0.166[0.121,0.242] Brier=0.249 Sp@0.5=0.154
+
+亚组：
+                group   n    AUROC  AUROC_lo  AUROC_hi  Se@Sp90  Se@Sp90_lo  Se@Sp90_hi    Brier   Sp@0.5
+     PTB-XL 内部 · 性别=0 390 0.977591  0.964611  0.988799 0.949239    0.873708    0.989476 0.066572 0.880829
+     PTB-XL 内部 · 性别=1 324 0.970696  0.950900  0.985869 0.934524    0.874233    0.984490 0.072509 0.878205
+PTB-XL 内部 · 年龄段=50-64 163 0.993825  0.983966  0.999513 1.000000    0.950956    1.000000 0.029124 0.950000
+PTB-XL 内部 · 年龄段=65-74 210 0.976273  0.958477  0.989729 0.927273    0.841093    0.981313 0.075400 0.880000
+  PTB-XL 内部 · 年龄段=75+ 272 0.962092  0.938088  0.982265 0.927536    0.781004    0.992595 0.074787 0.850746
+   中国域 · paroxysmalAF 103 0.994792  0.988249  1.000000 1.000000    0.974359    1.000000 0.029396 0.923077
+
+saved: /Users/mac/Desktop/库/公共数据AF/out/fig4_forest.png
+[5/9] recalibrate_multi.py
+/Users/mac/Desktop/库/公共数据AF/code/recalibrate_multi.py:167: UserWarning: linestyle is redundantly defined by the 'linestyle' keyword argument and the fmt string "o-" (-> linestyle='-'). The keyword argument will take precedence.
+  ax.plot(xs, ys, "o-", ls=ls, color=col, alpha=0.85,
+源域校准温度 T=3.25（训练集 5 折 OOF 拟合；>1 表示源域概率偏极端）
+
+--- CinC2017（消费级可穿戴单导联） ---
+  未校准                  AUROC=0.885 Brier=0.221 ECE=0.225 ECE_eq=0.226 Se@Sp90=0.586 平均预测=0.514 实际=0.299
+  温度缩放(源域拟合)           AUROC=0.885 Brier=0.187 ECE=0.226 ECE_eq=0.226 Se@Sp90=0.586 平均预测=0.525 实际=0.299
+  温度缩放(目标域拟合)          AUROC=0.885 Brier=0.180 ECE=0.225 ECE_eq=0.225 Se@Sp90=0.586 平均预测=0.524 实际=0.299
+  等渗回归(源域拟合)           AUROC=0.883 Brier=0.192 ECE=0.227 ECE_eq=0.227 Se@Sp90=0.722 平均预测=0.525 实际=0.299
+  等渗回归(目标域拟合)          AUROC=0.888 Brier=0.121 ECE=0.000 ECE_eq=0.011 Se@Sp90=0.623 平均预测=0.299 实际=0.299
+
+--- CPSC2021（中国动态 ECG 30 秒窗） ---
+  未校准                  AUROC=0.946 Brier=0.128 ECE=0.143 ECE_eq=0.143 Se@Sp90=0.871 平均预测=0.624 实际=0.480
+  温度缩放(源域拟合)           AUROC=0.946 Brier=0.109 ECE=0.135 ECE_eq=0.135 Se@Sp90=0.871 平均预测=0.615 实际=0.480
+  温度缩放(目标域拟合)          AUROC=0.946 Brier=0.109 ECE=0.130 ECE_eq=0.134 Se@Sp90=0.871 平均预测=0.610 实际=0.480
+  等渗回归(源域拟合)           AUROC=0.944 Brier=0.113 ECE=0.132 ECE_eq=0.133 Se@Sp90=0.889 平均预测=0.612 实际=0.480
+  等渗回归(目标域拟合)          AUROC=0.952 Brier=0.070 ECE=0.000 ECE_eq=0.020 Se@Sp90=0.918 平均预测=0.480 实际=0.480
+
+saved: /Users/mac/Desktop/库/公共数据AF/out/fig3_recalibration_multidomain.png
+[6/9] recalibrate_dca.py
+/Users/mac/.venvs/afpub/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/Users/mac/.venvs/afpub/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/Users/mac/.venvs/afpub/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/Users/mac/.venvs/afpub/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/Users/mac/.venvs/afpub/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/Users/mac/.venvs/afpub/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/Users/mac/.venvs/afpub/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/Users/mac/.venvs/afpub/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/Users/mac/.venvs/afpub/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/Users/mac/.venvs/afpub/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/Users/mac/.venvs/afpub/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/Users/mac/.venvs/afpub/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1381: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+PTB-XL n=2399  CinC2017 n=2537  features=31
+fit=1685 internal-test=714 external=2537（校准器用训练集 5 折 OOF 拟合）
+  hgb | 内部验证（未校准）                                      AUROC=0.974 Brier=0.069 ECE=0.065 ECE_eq=0.051 斜率=0.37 Se@Sp90=0.945 平均预测=0.549 实际=0.511
+  hgb | 外部验证（未校准）                                      AUROC=0.885 Brier=0.221 ECE=0.225 ECE_eq=0.226 斜率=0.28 Se@Sp90=0.586 平均预测=0.514 实际=0.299
+  hgb | 外部 + 源域温度(T=3.25)                              AUROC=0.885 Brier=0.187 ECE=0.226 ECE_eq=0.226 斜率=0.90 Se@Sp90=0.586 平均预测=0.525 实际=0.299
+  hgb | 外部 + 目标域温度(T=5.89, oracle)                     AUROC=0.885 Brier=0.180 ECE=0.225 ECE_eq=0.225 斜率=1.64 Se@Sp90=0.586 平均预测=0.524 实际=0.299
+  hgb | 外部 + 源域等渗                                      AUROC=0.883 Brier=0.192 ECE=0.227 ECE_eq=0.227 斜率=0.88 Se@Sp90=0.722 平均预测=0.525 实际=0.299
+  hgb | 外部 + 目标域等渗(oracle)                             AUROC=0.888 Brier=0.121 ECE=0.000 ECE_eq=0.011 斜率=1.00 Se@Sp90=0.623 平均预测=0.299 实际=0.299
+  logreg | 内部验证（未校准）                                   AUROC=0.950 Brier=0.075 ECE=0.037 ECE_eq=0.044 斜率=0.87 Se@Sp90=0.847 平均预测=0.526 实际=0.511
+  logreg | 外部验证（未校准）                                   AUROC=0.789 Brier=0.588 ECE=0.613 ECE_eq=0.612 斜率=0.25 Se@Sp90=0.398 平均预测=0.911 实际=0.299
+  logreg | 外部 + 源域温度(T=1.10)                           AUROC=0.789 Brier=0.581 ECE=0.610 ECE_eq=0.609 斜率=0.25 Se@Sp90=0.398 平均预测=0.908 实际=0.299
+  logreg | 外部 + 目标域温度(T=20.09, oracle)                 AUROC=0.789 Brier=0.271 ECE=0.294 ECE_eq=0.294 斜率=3.57 Se@Sp90=0.398 平均预测=0.593 实际=0.299
+  logreg | 外部 + 源域等渗                                   AUROC=0.763 Brier=0.582 ECE=0.608 ECE_eq=0.607 斜率=0.19 Se@Sp90=0.420 平均预测=0.906 实际=0.299
+  logreg | 外部 + 目标域等渗(oracle)                          AUROC=0.795 Brier=0.157 ECE=0.000 ECE_eq=0.023 斜率=1.00 Se@Sp90=0.512 平均预测=0.299 实际=0.299
+saved: /Users/mac/Desktop/库/公共数据AF/out/fig3_recalibration_netbenefit.png
+[7/9] ppv_npv.py
+saved: /Users/mac/Desktop/库/公共数据AF/out/fig5_ppv_npv.png
+                                       operating_point  prevalence       se       sp    PPV    NPV  每检出1例需复核阳性例数
+                            本研究 · 内部验证（PTB-XL，Se@Sp90）        0.01 0.945205 0.900000 0.0872 0.9994          11.5
+                            本研究 · 内部验证（PTB-XL，Se@Sp90）        0.05 0.945205 0.900000 0.3322 0.9968           3.0
+                            本研究 · 内部验证（PTB-XL，Se@Sp90）        0.20 0.945205 0.900000 0.7026 0.9850           1.4
+                                 本研究 · 外部1 可穿戴（0.5 阈值）        0.01 0.940633 0.671726 0.0281 0.9991          35.6
+                                 本研究 · 外部1 可穿戴（0.5 阈值）        0.05 0.940633 0.671726 0.1310 0.9954           7.6
+                                 本研究 · 外部1 可穿戴（0.5 阈值）        0.20 0.940633 0.671726 0.4174 0.9784           2.4
+                                本研究 · 外部1 可穿戴（Se@Sp90）        0.01 0.585752 0.900000 0.0559 0.9954          17.9
+                                本研究 · 外部1 可穿戴（Se@Sp90）        0.05 0.585752 0.900000 0.2356 0.9763           4.2
+                                本研究 · 外部1 可穿戴（Se@Sp90）        0.20 0.585752 0.900000 0.5942 0.8968           1.7
+                          本研究 · 外部1 严格 A vs N（Se@Sp90）        0.01 0.890501 0.900000 0.0825 0.9988          12.1
+                          本研究 · 外部1 严格 A vs N（Se@Sp90）        0.05 0.890501 0.900000 0.3191 0.9936           3.1
+                          本研究 · 外部1 严格 A vs N（Se@Sp90）        0.20 0.890501 0.900000 0.6900 0.9705           1.4
+                            本研究 · 外部1 A vs 噪声（Se@Sp90）        0.01 0.166227 0.900000 0.0165 0.9907          60.6
+                            本研究 · 外部1 A vs 噪声（Se@Sp90）        0.05 0.166227 0.900000 0.0804 0.9535          12.4
+                            本研究 · 外部1 A vs 噪声（Se@Sp90）        0.20 0.166227 0.900000 0.2936 0.8119           3.4
+                           本研究 · 中国域 CPSC2021（Se@Sp90）        0.01 0.871429 0.900000 0.0809 0.9986          12.4
+                           本研究 · 中国域 CPSC2021（Se@Sp90）        0.05 0.871429 0.900000 0.3144 0.9925           3.2
+                           本研究 · 中国域 CPSC2021（Se@Sp90）        0.20 0.871429 0.900000 0.6854 0.9655           1.5
+                       对照锚点 · 导师团队 PACE 2024（间期级，消融人群）        0.01 0.963000 0.995000 0.6605 0.9996           1.5
+                       对照锚点 · 导师团队 PACE 2024（间期级，消融人群）        0.05 0.963000 0.995000 0.9102 0.9980           1.1
+                       对照锚点 · 导师团队 PACE 2024（间期级，消融人群）        0.20 0.963000 0.995000 0.9797 0.9908           1.0
+                      对照锚点 · 导师团队 Adv Sci 2026（双模态校正后）        0.01 0.986000 0.992700 0.5770 0.9999           1.7
+                      对照锚点 · 导师团队 Adv Sci 2026（双模态校正后）        0.05 0.986000 0.992700 0.8767 0.9993           1.1
+                      对照锚点 · 导师团队 Adv Sci 2026（双模态校正后）        0.20 0.986000 0.992700 0.9712 0.9965           1.0
+            对照锚点 · 导师团队 JACC Clin EP 2026（间期级，728 例前瞻）        0.01 0.987000 0.995600 0.6938 0.9999           1.4
+            对照锚点 · 导师团队 JACC Clin EP 2026（间期级，728 例前瞻）        0.05 0.987000 0.995600 0.9219 0.9993           1.1
+            对照锚点 · 导师团队 JACC Clin EP 2026（间期级，728 例前瞻）        0.20 0.987000 0.995600 0.9825 0.9967           1.0
+对照锚点 · 导师团队 Heart Rhythm O2 2025（眼底 DL 外验 AUROC 0.773）        0.01 0.773000 0.900000 0.0724 0.9975          13.8
+对照锚点 · 导师团队 Heart Rhythm O2 2025（眼底 DL 外验 AUROC 0.773）        0.05 0.773000 0.900000 0.2892 0.9869           3.5
+对照锚点 · 导师团队 Heart Rhythm O2 2025（眼底 DL 外验 AUROC 0.773）        0.20 0.773000 0.900000 0.6590 0.9407           1.5
+[8/9] make_numbersheet.py
+numbersheet: 153 条 → out/numbersheet.md
+section
+CI         24
+PPV/NPV    30
+主结果        24
+亚组         12
+域内参照/其他    10
+数据          9
+稳健性        30
+重校准        14
+[9/9] audit_numbers.py
+# 数字出处审计 v2（权威值池 + 同源一致性回归）
+
+权威值池（numbersheet.json）数值个数：342
+
+## A. 同源一致性（exp1 vs table_domains vs table_ci，容差 5e-4）
+- ✅ 内部：PTB-XL（德国 12 导联） · auroc: exp1=0.974400 vs domains/ci=0.974400 (|Δ|=0.00e+00)
+- ✅ 内部：PTB-XL（德国 12 导联） · auprc: exp1=0.971970 vs domains/ci=0.971970 (|Δ|=1.11e-16)
+- ✅ 内部：PTB-XL（德国 12 导联） · brier: exp1=0.069266 vs domains/ci=0.069266 (|Δ|=5.55e-17)
+- ✅ 内部：PTB-XL（德国 12 导联） · ece: exp1=0.064924 vs domains/ci=0.064924 (|Δ|=4.16e-17)
+- ✅ 内部：PTB-XL（德国 12 导联） · se_at_sp90: exp1=0.945205 vs domains/ci=0.945205 (|Δ|=0.00e+00)
+- ✅ 外部 1：CinC2017（消费级单导联） · auroc: exp1=0.885496 vs domains/ci=0.885496 (|Δ|=0.00e+00)
+- ✅ 外部 1：CinC2017（消费级单导联） · auprc: exp1=0.701484 vs domains/ci=0.701484 (|Δ|=0.00e+00)
+- ✅ 外部 1：CinC2017（消费级单导联） · brier: exp1=0.220735 vs domains/ci=0.220735 (|Δ|=8.33e-17)
+- ✅ 外部 1：CinC2017（消费级单导联） · ece: exp1=0.225398 vs domains/ci=0.225398 (|Δ|=5.55e-17)
+- ✅ 外部 1：CinC2017（消费级单导联） · se_at_sp90: exp1=0.585752 vs domains/ci=0.585752 (|Δ|=0.00e+00)
+- ✅ 外部 2：CPSC2021（中国动态 ECG） · auroc: exp1=0.946146 vs domains/ci=0.946146 (|Δ|=0.00e+00)
+- ✅ 外部 2：CPSC2021（中国动态 ECG） · auprc: exp1=0.891792 vs domains/ci=0.891792 (|Δ|=0.00e+00)
+- ✅ 外部 2：CPSC2021（中国动态 ECG） · brier: exp1=0.128084 vs domains/ci=0.128084 (|Δ|=5.55e-17)
+- ✅ 外部 2：CPSC2021（中国动态 ECG） · ece: exp1=0.143260 vs domains/ci=0.143260 (|Δ|=0.00e+00)
+- ✅ 外部 2：CPSC2021（中国动态 ECG） · se_at_sp90: exp1=0.871429 vs domains/ci=0.871429 (|Δ|=0.00e+00)
+- ✅ CI表 内部：PTB-XL（德国12导） · AUROC: exp1=0.974400 vs domains/ci=0.974400 (|Δ|=0.00e+00)
+- ✅ CI表 内部：PTB-XL（德国12导） · Se@Sp90: exp1=0.945205 vs domains/ci=0.945205 (|Δ|=0.00e+00)
+- ✅ CI表 内部：PTB-XL（德国12导） · Brier: exp1=0.069266 vs domains/ci=0.069266 (|Δ|=0.00e+00)
+- ✅ CI表 外部1：CinC2017 全部（A vs 非A） · AUROC: exp1=0.885496 vs domains/ci=0.885496 (|Δ|=0.00e+00)
+- ✅ CI表 外部1：CinC2017 全部（A vs 非A） · Se@Sp90: exp1=0.585752 vs domains/ci=0.585752 (|Δ|=0.00e+00)
+- ✅ CI表 外部1：CinC2017 全部（A vs 非A） · Brier: exp1=0.220735 vs domains/ci=0.220735 (|Δ|=0.00e+00)
+- ✅ CI表 外部2：CPSC2021（中国，30秒窗） · AUROC: exp1=0.946146 vs domains/ci=0.946146 (|Δ|=0.00e+00)
+- ✅ CI表 外部2：CPSC2021（中国，30秒窗） · Se@Sp90: exp1=0.871429 vs domains/ci=0.871429 (|Δ|=0.00e+00)
+- ✅ CI表 外部2：CPSC2021（中国，30秒窗） · Brier: exp1=0.128084 vs domains/ci=0.128084 (|Δ|=0.00e+00)
+- ✅ 重校准表未校准行 源域 PTB-XL · auroc: exp1=0.974400 vs domains/ci=0.974400 (|Δ|=0.00e+00)
+- ✅ 重校准表未校准行 源域 PTB-XL · brier: exp1=0.069266 vs domains/ci=0.069266 (|Δ|=0.00e+00)
+- ✅ 重校准表未校准行 源域 PTB-XL · ece: exp1=0.064924 vs domains/ci=0.064924 (|Δ|=0.00e+00)
+- ✅ 重校准表未校准行 源域 PTB-XL · se_at_sp90: exp1=0.945205 vs domains/ci=0.945205 (|Δ|=0.00e+00)
+- ✅ 重校准表未校准行 CinC2017（消费级可穿戴单导联） · auroc: exp1=0.885496 vs domains/ci=0.885496 (|Δ|=0.00e+00)
+- ✅ 重校准表未校准行 CinC2017（消费级可穿戴单导联） · brier: exp1=0.220735 vs domains/ci=0.220735 (|Δ|=0.00e+00)
+- ✅ 重校准表未校准行 CinC2017（消费级可穿戴单导联） · ece: exp1=0.225398 vs domains/ci=0.225398 (|Δ|=0.00e+00)
+- ✅ 重校准表未校准行 CinC2017（消费级可穿戴单导联） · se_at_sp90: exp1=0.585752 vs domains/ci=0.585752 (|Δ|=0.00e+00)
+- ✅ 重校准表未校准行 CPSC2021（中国动态 ECG 30 秒窗） · auroc: exp1=0.946146 vs domains/ci=0.946146 (|Δ|=0.00e+00)
+- ✅ 重校准表未校准行 CPSC2021（中国动态 ECG 30 秒窗） · brier: exp1=0.128084 vs domains/ci=0.128084 (|Δ|=0.00e+00)
+- ✅ 重校准表未校准行 CPSC2021（中国动态 ECG 30 秒窗） · ece: exp1=0.143260 vs domains/ci=0.143260 (|Δ|=0.00e+00)
+- ✅ 重校准表未校准行 CPSC2021（中国动态 ECG 30 秒窗） · se_at_sp90: exp1=0.871429 vs domains/ci=0.871429 (|Δ|=0.00e+00)
+
+**一致性结论：PASS**
+
+## 05_P2论文骨架.md（抽取到 110 个小数）
+- ✅ 全部命中权威值池（numbersheet.json）
+
+## 06_P2_Methods与Results初稿.md（抽取到 84 个小数）
+- ✅ 全部命中权威值池（numbersheet.json）
+
+## 08_投稿格式与投稿信.md（抽取到 18 个小数）
+- ✅ 全部命中权威值池（numbersheet.json）
+
+## 10_一页中文研究简介.md（抽取到 25 个小数）
+- ✅ 全部命中权威值池（numbersheet.json）
+
+## README_正式结果.md（抽取到 133 个小数）
+- ✅ 全部命中权威值池（numbersheet.json）
+
+---
+总体：✅ PASS
+
+[10/10] make_submission_docx.py
+refs parsed: 24 | 编号: [1, 2, 3] ... [22, 23, 24]
+saved: /Users/mac/Desktop/文稿库/人工智能临床应用/P2_manuscript_v0.1.docx 
+saved: /Users/mac/Desktop/文稿库/人工智能临床应用/P2_abstract_250w.docx
+refs parsed: 24
+abstract words (approx): 257
+[bonus] JACC variant / supplementary / graphical abstract
+saved: /Users/mac/Desktop/文稿库/人工智能临床应用/P2_manuscript_JACCCEP_v0.1.docx
+结构化摘要词数: 240 | ≤250? True | Condensed: 89 | ≤100? True
+saved: /Users/mac/Desktop/文稿库/人工智能临床应用/P2_supplementary_v0.1.docx
+S1 rows: 6 | S2 rows: 11 | features: 31 | CinC2017 subset: 2537 {'N': 1000, 'A': 758, 'O': 500, '~': 279}
+saved: /Users/mac/Desktop/库/公共数据AF/out/graphical_abstract.png
+============================================
+全链完成。输出目录: /Users/mac/Desktop/库/公共数据AF/out
+投稿主稿: /Users/mac/Desktop/文稿库/人工智能临床应用/P2_manuscript_v0.1.docx
+============================================

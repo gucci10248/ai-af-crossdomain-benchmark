@@ -1,0 +1,52 @@
+[
+  {
+    "Figure": "Figure 1",
+    "File": "fig1_flow.png",
+    "Width_px": 6258,
+    "Height_px": 3542,
+    "DPI_reported": "600",
+    "Size_MB": 0.74,
+    "Colour_palette": "Okabe-Ito colour-blind-safe",
+    "Caption_summary": "Study flow and cohort provenance"
+  },
+  {
+    "Figure": "Figure 2",
+    "File": "fig2_multidomain_calibration.png",
+    "Width_px": 9600,
+    "Height_px": 2880,
+    "DPI_reported": "600",
+    "Size_MB": 0.86,
+    "Colour_palette": "Okabe-Ito colour-blind-safe",
+    "Caption_summary": "Multi-domain performance"
+  },
+  {
+    "Figure": "Figure 3",
+    "File": "fig3_recalibration_multidomain.png",
+    "Width_px": 7800,
+    "Height_px": 3000,
+    "DPI_reported": "600",
+    "Size_MB": 1.14,
+    "Colour_palette": "Okabe-Ito colour-blind-safe",
+    "Caption_summary": "Recalibration and clinical usefulness"
+  },
+  {
+    "Figure": "Figure 4",
+    "File": "fig4_forest.png",
+    "Width_px": 8400,
+    "Height_px": 4224,
+    "DPI_reported": "600",
+    "Size_MB": 0.68,
+    "Colour_palette": "Okabe-Ito colour-blind-safe",
+    "Caption_summary": "Forest plot of AUROC and sensitivity at 90% specificity"
+  },
+  {
+    "Figure": "Figure 5",
+    "File": "fig5_ppv_npv.png",
+    "Width_px": 6300,
+    "Height_px": 3600,
+    "DPI_reported": "600",
+    "Size_MB": 1.02,
+    "Colour_palette": "Okabe-Ito colour-blind-safe",
+    "Caption_summary": "Positive predictive value versus prevalence"
+  }
+]

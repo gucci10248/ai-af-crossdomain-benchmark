@@ -1,12 +1,12 @@
 # 初审快照 SHA-256 校验清单
-生成: 2026-09-16 14:11:19
+生成: 2026-09-16 14:26:42
 
 ## 投稿文件
 
-bd5fe1c30560e5d3e7be96fbd515134b2daabaa855cff49421a75ac30ab011e4  P2_manuscript_v0.1.docx
-cf6faab930e55ddd4b59aa0a568b1379827a28f8706b32a057eea140d20227fb  P2_abstract_250w.docx
-bbf06fbcf32d644caff33b60186810837ca8d8ebefc3181617396e759dab73b1  P2_supplementary_v0.1.docx
-8df21c059122be282d71de7e4e7caecc11a840854cb2b3c77536170fd76432c4  P2_manuscript_JACCCEP_v0.1.docx
+483e9d00df245df3a432f58d0c1e246fbaaa70566f73b2a4eda1860a487dc197  P2_manuscript_v0.1.docx
+8fd73d8a49faeba2305a93250d7af6f740dbcf7cfe86c92477be37d68a9cd5e5  P2_abstract_250w.docx
+908d1e1dd0638b19262feb10dcbf20fefd0f0af702d5e2429f8fb3fbb9c303fe  P2_supplementary_v0.1.docx
+bab65477f7b3015dcc0112feb050ec5b36beab6b9ee535a4611340beb24dba28  P2_manuscript_JACCCEP_v0.1.docx
 63d838d1efd140ec4b90a2ccd09b309ce2ed61e7209df67e2dc5045e3653e611  参考文献_24条_P2.ris
 0fe48d005d9aa42dc00017e1c54032094484f9032a4e443b3049bf194322d25b  05_P2论文骨架.md
 dcc04b2f9f3c8d80a696fb7dbb3226f5dddfe6d8ea7edfdd7e42873cb0c41760  06_P2_Methods与Results初稿.md
@@ -34,4 +34,4 @@ f46eceb1d69dc66518633baf7d3056b4dd94f17d7f39eef42a0385e0ff6eea99  out/fig4_fores
 
 ## Git 状态
 v1.0.0 = f45f9759447e6fbe2e3c9e16fe28d0d3a83564a1
-HEAD   = c1e0cc5d02d4712bf4ba86a67a553c2b2c85ab5c
+HEAD   = d8ca71570d9de18d6e40592969a754a8636944a0

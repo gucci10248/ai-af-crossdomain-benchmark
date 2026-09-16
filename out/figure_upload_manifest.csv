@@ -1,0 +1,6 @@
+Figure,File,Width_px,Height_px,DPI_reported,Size_MB,Colour_palette,Caption_summary
+Figure 1,fig1_flow.png,6258,3542,600,0.74,Okabe-Ito colour-blind-safe,Study flow and cohort provenance
+Figure 2,fig2_multidomain_calibration.png,9600,2880,600,0.86,Okabe-Ito colour-blind-safe,Multi-domain performance
+Figure 3,fig3_recalibration_multidomain.png,7800,3000,600,1.14,Okabe-Ito colour-blind-safe,Recalibration and clinical usefulness
+Figure 4,fig4_forest.png,8400,4224,600,0.68,Okabe-Ito colour-blind-safe,Forest plot of AUROC and sensitivity at 90% specificity
+Figure 5,fig5_ppv_npv.png,6300,3600,600,1.02,Okabe-Ito colour-blind-safe,Positive predictive value versus prevalence
