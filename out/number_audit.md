@@ -1,6 +1,6 @@
 # 数字出处审计 v2（权威值池 + 同源一致性回归）
 
-权威值池（numbersheet.json）数值个数：278
+权威值池（numbersheet.json）数值个数：342
 
 ## A. 同源一致性（exp1 vs table_domains vs table_ci，容差 5e-4）
 - ✅ 内部：PTB-XL（德国 12 导联） · auroc: exp1=0.974400 vs domains/ci=0.974400 (|Δ|=0.00e+00)

@@ -19,7 +19,7 @@ except Exception:
     pass
 
 OUT = pathlib.Path("/Users/mac/Desktop/库/公共数据AF/out")
-C1, C2, C3, C4 = "#1f77b4", "#d62728", "#2ca02c", "#6a5acd"
+C1, C2, C3, C4 = "#0072B2", "#D55E00", "#009E73", "#CC79A7"  # Okabe-Ito 色盲友好
 BOX = dict(boxstyle="round,pad=0.35", linewidth=1.4)
 
 
@@ -101,5 +101,6 @@ ax.text(0.35, 7.15, "Fig 1｜研究流程：三个公开队列 → 统一标签 
 ax.text(0.35, 0.02, "注：全部数据为公开库（PhysioNet 开放 / CC-BY），无院内或去标识患者数据。",
         fontsize=7.2, color="#666666")
 
-fig.savefig(OUT / "fig1_flow.png", dpi=200, bbox_inches="tight")
+fig.savefig(OUT / "fig1_flow.png", dpi=600, bbox_inches="tight")
+fig.savefig(OUT / "fig1_flow.tiff", dpi=600, bbox_inches="tight", pil_kwargs={"compression": "tiff_lzw"})
 print("saved:", OUT / "fig1_flow.png")

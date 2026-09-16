@@ -64,9 +64,9 @@ def main():
                         HistGradientBoostingClassifier(max_iter=300, learning_rate=0.06, random_state=0))
     mdl.fit(tr[feats], tr["label"])
 
-    sets = [("内部：PTB-XL（德国 12 导联）", te["label"].values, mdl.predict_proba(te[feats])[:, 1], "#1f77b4"),
-            ("外部 1：CinC2017（消费级单导联）", df_c["label"].values, mdl.predict_proba(df_c[feats])[:, 1], "#d62728"),
-            ("外部 2：CPSC2021（中国动态 ECG）", df_x["label"].values, mdl.predict_proba(df_x[feats])[:, 1], "#2ca02c")]
+    sets = [("内部：PTB-XL（德国 12 导联）", te["label"].values, mdl.predict_proba(te[feats])[:, 1], "#0072B2"),
+            ("外部 1：CinC2017（消费级单导联）", df_c["label"].values, mdl.predict_proba(df_c[feats])[:, 1], "#D55E00"),
+            ("外部 2：CPSC2021（中国动态 ECG）", df_x["label"].values, mdl.predict_proba(df_x[feats])[:, 1], "#009E73")]
 
     rows = []
     for name, y, p, _ in sets:
@@ -101,9 +101,9 @@ def main():
 
     ax = axes[2]
     x = np.arange(len(tbl)); w = 0.27
-    ax.bar(x - w, tbl["auroc"], w, label="AUROC", color="#1f77b4")
-    ax.bar(x, tbl["brier"], w, label="Brier（越低越好）", color="#d62728")
-    ax.bar(x + w, tbl["se_at_sp90"], w, label="Se@特异度90%", color="#2ca02c")
+    ax.bar(x - w, tbl["auroc"], w, label="AUROC", color="#0072B2")
+    ax.bar(x, tbl["brier"], w, label="Brier（越低越好）", color="#D55E00")
+    ax.bar(x + w, tbl["se_at_sp90"], w, label="Se@特异度90%", color="#009E73")
     for i, r in tbl.iterrows():
         ax.text(i - w, r.auroc + .01, f"{r.auroc:.2f}", ha="center", fontsize=7.5)
         ax.text(i, r.brier + .01, f"{r.brier:.2f}", ha="center", fontsize=7.5)
@@ -112,7 +112,8 @@ def main():
     ax.set_title("判别力小幅下降，校准与操作点大幅下降"); ax.legend(fontsize=8); ax.grid(alpha=.3, axis="y")
 
     plt.tight_layout()
-    fig.savefig(OUT / "fig2_multidomain_calibration.png", dpi=200)
+    fig.savefig(OUT / "fig2_multidomain_calibration.png", dpi=600)
+    fig.savefig(OUT / "fig2_multidomain_calibration.tiff", dpi=600, pil_kwargs={"compression": "tiff_lzw"})
     print("saved:", OUT / "fig2_multidomain_calibration.png")
 
 

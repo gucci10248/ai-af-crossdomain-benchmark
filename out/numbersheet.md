@@ -1,6 +1,6 @@
 # 权威数字表（写作时只从此处取数）
 
-生成时间：见文件 mtime ｜ 共 123 条 ｜ 来源：out/*.csv|json（均为脚本真实运行输出）
+生成时间：见文件 mtime ｜ 共 153 条 ｜ 来源：out/*.csv|json（均为脚本真实运行输出）
 
 ## 数据
 
@@ -159,4 +159,39 @@
 | 对照锚点 · 导师团队 Heart Rhythm O2 2025（眼底 DL 外验 AUROC 0.773） · 患病率1% | PPV 7.2% / NPV 99.75% / 每检出1例需复核 13.8 例 | out/table_ppv_npv.csv | ppv_npv.py |
 | 对照锚点 · 导师团队 Heart Rhythm O2 2025（眼底 DL 外验 AUROC 0.773） · 患病率5% | PPV 28.9% / NPV 98.69% / 每检出1例需复核 3.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
 | 对照锚点 · 导师团队 Heart Rhythm O2 2025（眼底 DL 外验 AUROC 0.773） · 患病率20% | PPV 65.9% / NPV 94.07% / 每检出1例需复核 1.5 例 | out/table_ppv_npv.csv | ppv_npv.py |
+
+## 稳健性
+
+| 项目 | 数值 | 来源文件 | 复现脚本 |
+|---|---|---|---|
+| 内部 PTB-XL（患者级划分） · Se@Sp90（6 种子） | seed0 0.9452 / 均值 0.9426±0.0109 / 范围 0.9246–0.9558 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 内部 PTB-XL（患者级划分） · AUROC（6 种子） | seed0 0.9744 / 均值 0.9743±0.0016 / 范围 0.9718–0.9764 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 内部 PTB-XL（患者级划分） · AUPRC（6 种子） | seed0 0.9720 / 均值 0.9723±0.0027 / 范围 0.9682–0.9754 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 内部 PTB-XL（患者级划分） · Brier（6 种子） | seed0 0.0693 / 均值 0.0691±0.0063 / 范围 0.0604–0.0771 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 内部 PTB-XL（患者级划分） · ECE（6 种子） | seed0 0.0649 / 均值 0.0659±0.0077 / 范围 0.0556–0.0754 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 外部1 CinC2017（可穿戴单导联） · Se@Sp90（6 种子） | seed0 0.5858 / 均值 0.5831±0.0485 / 范围 0.4947–0.6385 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 外部1 CinC2017（可穿戴单导联） · AUROC（6 种子） | seed0 0.8855 / 均值 0.8854±0.0065 / 范围 0.8735–0.8933 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 外部1 CinC2017（可穿戴单导联） · AUPRC（6 种子） | seed0 0.7015 / 均值 0.7278±0.0249 / 范围 0.6978–0.7563 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 外部1 CinC2017（可穿戴单导联） · Brier（6 种子） | seed0 0.2207 / 均值 0.2073±0.0180 / 范围 0.1896–0.2306 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 外部1 CinC2017（可穿戴单导联） · ECE（6 种子） | seed0 0.2254 / 均值 0.2093±0.0204 / 范围 0.1874–0.2333 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 外部1a CinC2017 严格 A vs N · Se@Sp90（6 种子） | seed0 0.8905 / 均值 0.8810±0.0170 / 范围 0.8588–0.8971 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 外部1a CinC2017 严格 A vs N · AUROC（6 种子） | seed0 0.9475 / 均值 0.9461±0.0027 / 范围 0.9417–0.9492 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 外部1a CinC2017 严格 A vs N · AUPRC（6 种子） | seed0 0.9050 / 均值 0.9146±0.0063 / 范围 0.9050–0.9229 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 外部1a CinC2017 严格 A vs N · Brier（6 种子） | seed0 0.1040 / 均值 0.1001±0.0092 / 范围 0.0915–0.1117 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 外部1a CinC2017 严格 A vs N · ECE（6 种子） | seed0 0.0983 / 均值 0.0906±0.0115 / 范围 0.0792–0.1038 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 外部2 CPSC2021（中国动态 ECG） · Se@Sp90（6 种子） | seed0 0.8714 / 均值 0.8292±0.0430 / 范围 0.7786–0.8786 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 外部2 CPSC2021（中国动态 ECG） · AUROC（6 种子） | seed0 0.9461 / 均值 0.9431±0.0086 / 范围 0.9340–0.9547 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 外部2 CPSC2021（中国动态 ECG） · AUPRC（6 种子） | seed0 0.8918 / 均值 0.9055±0.0142 / 范围 0.8918–0.9243 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 外部2 CPSC2021（中国动态 ECG） · Brier（6 种子） | seed0 0.1281 / 均值 0.1112±0.0167 / 范围 0.0917–0.1309 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| 外部2 CPSC2021（中国动态 ECG） · ECE（6 种子） | seed0 0.1433 / 均值 0.1213±0.0220 / 范围 0.0970–0.1437 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| CinC2017 域内 5 折参照 · Se@Sp90（6 种子） | seed0 0.8654 / 均值 0.8604±0.0088 / 范围 0.8470–0.8681 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| CinC2017 域内 5 折参照 · AUROC（6 种子） | seed0 0.9523 / 均值 0.9522±0.0005 / 范围 0.9518–0.9531 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| CinC2017 域内 5 折参照 · AUPRC（6 种子） | seed0 0.9108 / 均值 0.9099±0.0025 / 范围 0.9075–0.9142 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| CinC2017 域内 5 折参照 · Brier（6 种子） | seed0 0.0859 / 均值 0.0850±0.0016 / 范围 0.0824–0.0867 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| CinC2017 域内 5 折参照 · ECE（6 种子） | seed0 0.0721 / 均值 0.0692±0.0031 / 范围 0.0635–0.0721 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| CPSC2021 域内分组 5 折参照 · Se@Sp90（6 种子） | seed0 0.7857 / 均值 0.7857±0.0000 / 范围 0.7857–0.7857 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| CPSC2021 域内分组 5 折参照 · AUROC（6 种子） | seed0 0.9232 / 均值 0.9232±0.0000 / 范围 0.9232–0.9232 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| CPSC2021 域内分组 5 折参照 · AUPRC（6 种子） | seed0 0.9169 / 均值 0.9169±0.0000 / 范围 0.9169–0.9169 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| CPSC2021 域内分组 5 折参照 · Brier（6 种子） | seed0 0.1357 / 均值 0.1357±0.0000 / 范围 0.1357–0.1357 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
+| CPSC2021 域内分组 5 折参照 · ECE（6 种子） | seed0 0.1262 / 均值 0.1262±0.0000 / 范围 0.1262–0.1262 | out_robustness/robustness_summary.csv | aggregate_robustness.py |
 

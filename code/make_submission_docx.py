@@ -42,9 +42,10 @@ def h(d, text, level=1):
     return p
 
 
-def body(d, text):
-    """保留 **粗体** 标记，去掉 markdown 链接等。"""
-    p = d.add_paragraph()
+def body(d, text, style=None):
+    """保留 **粗体** 标记，去掉 markdown 链接/反引号等；可选列表样式。"""
+    text = text.replace("`", "")
+    p = d.add_paragraph(style=style) if style else d.add_paragraph()
     for i, chunk in enumerate(re.split(r"\*\*(.+?)\*\*", text)):
         if not chunk:
             continue
@@ -161,31 +162,31 @@ for b in WHATS_NEW:
     p = d.add_paragraph(style="List Bullet")
     p.add_run(b).font.size = Pt(11)
 
+def emit(text):
+    """按行输出正文：### → 二级标题；- / 1. → 列表；其余 → 段落。"""
+    for para in [x.strip() for x in text.split("\n") if x.strip()]:
+        if para.startswith("###"):
+            h(d, re.sub(r"^###\s*", "", para), 2)
+        elif para.startswith("- "):
+            body(d, para[2:].strip(), style="List Bullet")
+        elif re.match(r"^\d+\.\s+", para):
+            body(d, re.sub(r"^\d+\.\s+", "", para), style="List Number")
+        else:
+            body(d, para)
+
+
 h(d, "Introduction", 1)
-for para in [x.strip() for x in intro.split("\n") if x.strip()]:
-    body(d, para)
+emit(intro)
 
 h(d, "Methods", 1)
-for para in [x.strip() for x in methods.split("\n") if x.strip()]:
-    if para.startswith("###"):
-        h(d, re.sub(r"^###\s*", "", para), 2)
-    else:
-        body(d, para)
+emit(methods)
 
 h(d, "Results", 1)
-for para in [x.strip() for x in results.split("\n") if x.strip()]:
-    if para.startswith("###"):
-        h(d, re.sub(r"^###\s*", "", para), 2)
-    else:
-        body(d, para)
+emit(results)
 callout(d, "[Table 1 near here] [Table 2 near here] [Table 3 near here] [Fig 1 near here] [Fig 2 near here] [Fig 3 near here] [Fig 4 near here] [Fig 5 near here]")
 
 h(d, "Discussion", 1)
-for para in [x.strip() for x in disc.split("\n") if x.strip()]:
-    if para.startswith("###"):
-        h(d, re.sub(r"^###\s*", "", para), 2)
-    else:
-        body(d, para)
+emit(disc)
 
 h(d, "Authors' contributions", 2)
 body(d, "Jinkai Guo: conceptualization; methodology; software and formal analysis (data acquisition, harmonisation, "
@@ -348,7 +349,8 @@ for leg in [
     "validated high-specificity smartwatch algorithm (99.5% specificity) is shown for reference.",
 ]:
     body(d, leg)
-callout(d, "[Figures 1\u20135 are submitted as separate PNG files (300 dpi): fig1_flow / fig2_multidomain_calibration / "
+callout(d, "[Figures 1\u20135 are submitted as separate files (600 dpi, PNG and LZW-compressed TIFF, "
+           "colour-blind-safe Okabe\u2013Ito palette): fig1_flow / fig2_multidomain_calibration / "
            "fig3_recalibration_multidomain / fig4_forest / fig5_ppv_npv; graphical abstract submitted separately.]")
 
 out1 = ART / "P2_manuscript_v0.1.docx"

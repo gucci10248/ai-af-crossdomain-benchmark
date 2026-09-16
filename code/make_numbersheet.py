@@ -80,6 +80,14 @@ for op in ppv["operating_point"].unique():
                 f"PPV {s['PPV']:.1%} / NPV {s['NPV']:.2%} / 每检出1例需复核 {s['每检出1例需复核阳性例数']:.1f} 例",
                 "out/table_ppv_npv.csv", "ppv_npv.py")
 
+# --- 多种子稳健性（如存在；seed0 为论文权威值，seed1–5 变动模型与划分种子）---
+_rob = BASE / "out_robustness" / "robustness_summary.csv"
+if _rob.exists():
+    for _, _r in pd.read_csv(_rob).iterrows():
+        add("稳健性", f"{_r['domain']} · {_r['metric']}（6 种子）",
+            f"seed0 {_r['seed0']:.4f} / 均值 {_r['mean']:.4f}±{_r['sd']:.4f} / 范围 {_r['min']:.4f}–{_r['max']:.4f}",
+            "out_robustness/robustness_summary.csv", "aggregate_robustness.py")
+
 df = pd.DataFrame(rows)
 json.dump(rows, open(OUT / "numbersheet.json", "w"), ensure_ascii=False, indent=1)
 

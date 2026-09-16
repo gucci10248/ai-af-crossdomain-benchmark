@@ -102,8 +102,8 @@ md.append(f"3. 反过来，在中国动态 ECG 域（Se@Sp90 = {_dom.loc[DOM_EXT
 # --- 图：PPV 随患病率变化 ---
 fig, ax = plt.subplots(figsize=(10.5, 6))
 prev_grid = np.logspace(np.log10(0.002), np.log10(0.6), 200)
-styles = [("#1f77b4", "-"), ("#d62728", "--"), ("#d62728", "-"), ("#9467bd", "-."),
-          ("#8c564b", ":"), ("#2ca02c", "-"), ("#ff7f0e", "-"), ("#e377c2", "--")]
+styles = [("#0072B2", "-"), ("#D55E00", "--"), ("#D55E00", "-"), ("#CC79A7", "-."),
+          ("#000000", ":"), ("#009E73", "-"), ("#E69F00", "-"), ("#56B4E9", "--")]  # Okabe-Ito
 for (name, se, sp, _), (col, ls) in zip(OPS, styles):
     ax.plot(prev_grid, [ppv(se, sp, p) * 100 for p in prev_grid], color=col, ls=ls, lw=2,
             label=f"{name}  (Se={se:.2f}, Sp={sp*100:.2f}%)")
@@ -114,7 +114,8 @@ ax.axvline(0.01, color="gray", ls=":", lw=1); ax.text(0.0105, 92, "社区筛查 
 ax.axvline(0.20, color="gray", ls=":", lw=1); ax.text(0.21, 92, "高危门诊 ~20%", fontsize=8, color="gray")
 ax.grid(alpha=.3); ax.legend(fontsize=7.6, loc="upper left"); ax.set_ylim(0, 100)
 plt.tight_layout()
-fig.savefig(OUT / "fig5_ppv_npv.png", dpi=200)
+fig.savefig(OUT / "fig5_ppv_npv.png", dpi=600)
+fig.savefig(OUT / "fig5_ppv_npv.tiff", dpi=600, pil_kwargs={"compression": "tiff_lzw"})
 print("saved:", OUT / "fig5_ppv_npv.png")
 print(tbl[tbl["prevalence"].isin([0.01, 0.05, 0.20])][
     ["operating_point", "prevalence", "se", "sp", "PPV", "NPV", "每检出1例需复核阳性例数"]].to_string(index=False))

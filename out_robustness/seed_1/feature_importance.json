@@ -1,0 +1,82 @@
+[
+ {
+  "feature": "f_rr_iqr",
+  "drop_in_auroc": 0.017237126117792025
+ },
+ {
+  "feature": "f_rr_median",
+  "drop_in_auroc": 0.009651557200123295
+ },
+ {
+  "feature": "f_sampen",
+  "drop_in_auroc": 0.005510329941412229
+ },
+ {
+  "feature": "f_rmssd_norm",
+  "drop_in_auroc": 0.005272895467159944
+ },
+ {
+  "feature": "f_rr_skew",
+  "drop_in_auroc": 0.005249768732654858
+ },
+ {
+  "feature": "f_pnn50",
+  "drop_in_auroc": 0.005192722787542281
+ },
+ {
+  "feature": "f_pnn20",
+  "drop_in_auroc": 0.005104841196422983
+ },
+ {
+  "feature": "f_rr_mean",
+  "drop_in_auroc": 0.00397779833487506
+ },
+ {
+  "feature": "f_rr_cv",
+  "drop_in_auroc": 0.003871415356151586
+ },
+ {
+  "feature": "f_rr_range",
+  "drop_in_auroc": 0.002338883749614462
+ },
+ {
+  "feature": "f_sd1_sd2",
+  "drop_in_auroc": 0.0018378045020042589
+ },
+ {
+  "feature": "f_hf_pow",
+  "drop_in_auroc": 0.00134597594819601
+ },
+ {
+  "feature": "f_sig_skew",
+  "drop_in_auroc": 0.0006305889608386294
+ },
+ {
+  "feature": "f_rr_kurt",
+  "drop_in_auroc": 0.0005257477644155628
+ },
+ {
+  "feature": "f_sd2",
+  "drop_in_auroc": 0.0005103299414121576
+ },
+ {
+  "feature": "f_pow_bp_0p5_5",
+  "drop_in_auroc": 0.000299105766265706
+ },
+ {
+  "feature": "f_hrv_ratio",
+  "drop_in_auroc": 0.00020043169904397916
+ },
+ {
+  "feature": "f_pow_bp_5_15",
+  "drop_in_auroc": 0.0001295097132284484
+ },
+ {
+  "feature": "f_sig_shannon",
+  "drop_in_auroc": 0.00012642614862772293
+ },
+ {
+  "feature": "f_sig_kurt",
+  "drop_in_auroc": 8.6339808818936e-05
+ }
+]

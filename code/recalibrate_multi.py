@@ -156,9 +156,9 @@ def main():
     fig, axes = plt.subplots(1, 2, figsize=(13, 5))
     ax = axes[0]
     for dname, d in fig_data.items():
-        for key, lab, col, ls in [("p", "未校准", "#d62728", "-"),
-                                  ("p_Tsrc", f"源域温度({d['T_src']:.2f})", "#ff7f0e", "--"),
-                                  ("p_Ttgt", f"目标域温度({d['T_tgt']:.2f})", "#2ca02c", "-")]:
+        for key, lab, col, ls in [("p", "未校准", "#D55E00", "-"),
+                                  ("p_Tsrc", f"源域温度({d['T_src']:.2f})", "#E69F00", "--"),
+                                  ("p_Ttgt", f"目标域温度({d['T_tgt']:.2f})", "#009E73", "-")]:
             edges = np.linspace(0, 1, 11); xs, ys = [], []
             for i in range(10):
                 m = (d[key] >= edges[i]) & (d[key] < edges[i + 1] if i < 9 else d[key] <= 1.0)
@@ -174,8 +174,8 @@ def main():
     for dname, d in fig_data.items():
         th, nb, nb_all = dca(d["y"], d["p"])
         th2, nb2, _ = dca(d["y"], d["p_Ttgt"])
-        ax.plot(th, nb, color="#d62728", ls="-" if "CinC" in dname else "--", label=f"{dname[:12]}… 未校准")
-        ax.plot(th, nb2, color="#2ca02c", ls="-" if "CinC" in dname else "--", label=f"{dname[:12]}… 目标域重校准")
+        ax.plot(th, nb, color="#D55E00", ls="-" if "CinC" in dname else "--", label=f"{dname[:12]}… 未校准")
+        ax.plot(th, nb2, color="#009E73", ls="-" if "CinC" in dname else "--", label=f"{dname[:12]}… 目标域重校准")
         ax.plot(th, nb_all, color="gray", lw=1, ls=":", label="全部判阳性" if "CinC" in dname else None)
     ax.axhline(0, color="gray", lw=1)
     ax.set_ylim(-0.25, 0.40)
@@ -183,7 +183,8 @@ def main():
     ax.set_title("决策曲线：重校准不改变 AURC，但改变可用阈值区间"); ax.legend(fontsize=6.5); ax.grid(alpha=.3)
 
     plt.tight_layout()
-    fig.savefig(OUT / "fig3_recalibration_multidomain.png", dpi=200)
+    fig.savefig(OUT / "fig3_recalibration_multidomain.png", dpi=600)
+    fig.savefig(OUT / "fig3_recalibration_multidomain.tiff", dpi=600, pil_kwargs={"compression": "tiff_lzw"})
     print("\nsaved:", OUT / "fig3_recalibration_multidomain.png")
 
 

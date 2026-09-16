@@ -7,7 +7,7 @@
   3) 校准度（Brier / ECE）与亚组（性别、年龄）差异 —— 这些才是"评价学"论文的真正内容
 输出：out/results_exp1.json、out/table_exp1.csv、out/fig_reliability.png、out/fig_feature_importance.png
 """
-import json, pathlib, sys, warnings
+import json, os, pathlib, sys, warnings
 import numpy as np
 import pandas as pd
 import wfdb
@@ -24,8 +24,12 @@ from features import extract  # noqa
 
 BASE = pathlib.Path("/Users/mac/Desktop/库/公共数据AF")
 DATA = BASE / "data"
-OUT = BASE / "out"
+OUT = pathlib.Path(os.environ.get("OUT_DIR", str(BASE / "out")))
 OUT.mkdir(exist_ok=True)
+# 稳健性重跑用：默认 SEED=0 / SPLIT_SEED=20260915 与权威结果逐位一致；
+# 仅当显式设置环境变量时才改变（输出目录由 OUT_DIR 隔离，绝不覆盖权威 out/）
+SEED = int(os.environ.get("SEED", "0"))
+SPLIT_SEED = int(os.environ.get("SPLIT_SEED", "20260915"))
 
 
 # ---------------- 数据读取 ----------------
@@ -199,7 +203,7 @@ def main():
 
     # 患者级划分（同一患者的所有记录只进一侧，避免泄漏）
     pats = df_p["patient_id"].unique()
-    rng = np.random.RandomState(20260915)
+    rng = np.random.RandomState(SPLIT_SEED)
     rng.shuffle(pats)
     n_tr = int(0.7 * len(pats))
     tr_pats = set(pats[:n_tr])
@@ -212,7 +216,7 @@ def main():
                                 LogisticRegression(max_iter=2000, class_weight="balanced")),
         "hgb": make_pipeline(SimpleImputer(strategy="median"),
                              HistGradientBoostingClassifier(max_iter=300, learning_rate=0.06,
-                                                            max_depth=None, random_state=0)),
+                                                            max_depth=None, random_state=SEED)),
     }
     results = {}
     best_name, best_auc, best_model = None, -1, None
@@ -251,12 +255,12 @@ def main():
 
         # 逐年 / 逐来源的域内对照：CinC2017 自身 5 折（患者不可辨，按记录随机）
         from sklearn.model_selection import StratifiedKFold
-        skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=0)
+        skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=SEED)
         oof = np.zeros(len(df_c))
         for tri, tei in skf.split(df_c[feats], df_c["label"]):
             m2 = type(mdl)(**mdl.named_steps[list(mdl.named_steps)[-1]].get_params()) if False else None
             mdl2 = make_pipeline(SimpleImputer(strategy="median"),
-                                 HistGradientBoostingClassifier(max_iter=300, learning_rate=0.06, random_state=0))
+                                 HistGradientBoostingClassifier(max_iter=300, learning_rate=0.06, random_state=SEED))
             mdl2.fit(df_c.iloc[tri][feats], df_c.iloc[tri]["label"])
             oof[tei] = mdl2.predict_proba(df_c.iloc[tei][feats])[:, 1]
         r_in = evaluate(df_c["label"].values, oof, "CinC2017 internal 5-fold (in-domain reference)")
@@ -283,7 +287,7 @@ def main():
         oof = np.zeros(len(df_x))
         for tri, tei in gkf.split(df_x[feats], df_x["label"], groups=g):
             m2 = make_pipeline(SimpleImputer(strategy="median"),
-                               HistGradientBoostingClassifier(max_iter=300, learning_rate=0.06, random_state=0))
+                               HistGradientBoostingClassifier(max_iter=300, learning_rate=0.06, random_state=SEED))
             m2.fit(df_x.iloc[tri][feats], df_x.iloc[tri]["label"])
             oof[tei] = m2.predict_proba(df_x.iloc[tei][feats])[:, 1]
         r_xin = evaluate(df_x["label"].values, oof, "CPSC2021 in-domain 5-fold (grouped by patient)")
@@ -296,7 +300,7 @@ def main():
     try:
         from sklearn.inspection import permutation_importance
         imp = permutation_importance(best_model, te[feats], te["label"], n_repeats=5,
-                                     random_state=0, scoring="roc_auc")
+                                     random_state=SEED, scoring="roc_auc")
         order = np.argsort(-imp.importances_mean)[:20]
         imp_rows = [{"feature": feats[i], "drop_in_auroc": float(imp.importances_mean[i])} for i in order]
         json.dump(imp_rows, open(OUT / "feature_importance.json", "w"), indent=1)

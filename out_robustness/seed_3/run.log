@@ -1,0 +1,37 @@
+== 读取 PTB-XL 子集 ==
+  loaded: 2399
+== 读取 CinC2017 子集 ==
+  loaded: 2537
+== 特征提取 ==
+  复用 PTB-XL 缓存特征: 2399
+  复用 CinC2017 缓存特征: 2537
+  CPSC2021 窗级特征已载入: 583 窗 / 25 位患者 / 阳性窗 280
+  n features: 31
+  PTB-XL patient-level split: train 1663 recs / test 736 recs
+  [logreg] AUROC=0.958 AUPRC=0.940 Brier=0.070 ECE=0.017
+  [logreg] EXTERNAL CinC2017 AUROC=0.830 Sens=0.976 Spec=0.182 Brier=0.497
+  [logreg] EXTERNAL strict(A vs N) n=1758 AUROC=0.863 Sens=0.976 Spec=0.188
+  [logreg] CinC2017 in-domain 5-fold AUROC=0.952
+  [hgb] AUROC=0.974 AUPRC=0.974 Brier=0.064 ECE=0.060
+  [hgb] EXTERNAL CinC2017 AUROC=0.893 Sens=0.916 Spec=0.730 Brier=0.191
+  [hgb] EXTERNAL strict(A vs N) n=1758 AUROC=0.945 Sens=0.916 Spec=0.883
+  [hgb] CinC2017 in-domain 5-fold AUROC=0.952
+  [logreg] EXTERNAL CPSC2021(中国) n=583 AUROC=0.939 Brier=0.396 ECE=0.439 Se=0.996 Sp=0.099
+  [hgb] EXTERNAL CPSC2021(中国) n=583 AUROC=0.955 Brier=0.099 ECE=0.103 Se=0.993 Sp=0.785
+  [hgb] CPSC2021 域内(按患者分组5折) AUROC=0.923 Brier=0.136 ECE=0.126
+  top features: f_rr_iqr(0.010), f_rr_mean(0.008), f_rr_cv(0.007), f_sampen(0.006), f_rr_skew(0.005), f_rmssd_norm(0.005), f_rr_median(0.005), f_pnn20(0.003)
+
+== 汇总 ==
+                            key                                                   dataset    n    auroc    auprc    brier      ece  sens@0.5  spec@0.5  sens@spec90
+          ptbxl_internal_logreg                                  PTB-XL internal (logreg)  736 0.958497 0.939873 0.070389 0.017314  0.932642  0.874286     0.901554
+  cinc2017_external_from_logreg              CinC2017 external (trained on PTB-XL/logreg) 2537 0.830489 0.677387 0.496912 0.541179  0.976253  0.181563     0.538259
+cinc2017_external_strict_logreg CinC2017 external AF-vs-N only (trained on PTB-XL/logreg) 1758 0.863288 0.837724 0.390771 0.427849  0.976253  0.188000     0.646438
+        cinc2017_internal_5fold            CinC2017 internal 5-fold (in-domain reference) 2537 0.952131 0.910457 0.086686 0.070241  0.791557  0.942664     0.846966
+             ptbxl_internal_hgb                                     PTB-XL internal (hgb)  736 0.974293 0.973719 0.064368 0.059799  0.948187  0.905714     0.950777
+     cinc2017_external_from_hgb                 CinC2017 external (trained on PTB-XL/hgb) 2537 0.893279 0.756275 0.190728 0.191853  0.915567  0.730185     0.638522
+   cinc2017_external_strict_hgb    CinC2017 external AF-vs-N only (trained on PTB-XL/hgb) 1758 0.945397 0.918232 0.091476 0.080474  0.915567  0.883000     0.891821
+       cpsc2021_external_logreg       CPSC2021 external (China, trained on PTB-XL/logreg)  583 0.939309 0.921751 0.395839 0.439099  0.996429  0.099010     0.764286
+          cpsc2021_external_hgb          CPSC2021 external (China, trained on PTB-XL/hgb)  583 0.954715 0.922101 0.099279 0.103467  0.992857  0.785479     0.878571
+        cpsc2021_internal_5fold            CPSC2021 in-domain 5-fold (grouped by patient)  583 0.923232 0.916858 0.135657 0.126250  0.892857  0.811881     0.785714
+
+结果已写入: /Users/mac/Desktop/库/公共数据AF/out_robustness/seed_3

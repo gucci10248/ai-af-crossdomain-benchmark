@@ -22,7 +22,7 @@ plt.rcParams["font.sans-serif"] = ["Helvetica", "Arial", "DejaVu Sans"]
 plt.rcParams["axes.unicode_minus"] = False
 
 OUT = pathlib.Path("/Users/mac/Desktop/库/公共数据AF/out")
-C_IN, C_EXT1, C_EXT2 = "#1f77b4", "#d62728", "#2ca02c"
+C_IN, C_EXT1, C_EXT2 = "#0072B2", "#D55E00", "#009E73"  # Okabe-Ito 色盲友好
 
 # --- 数字全部从权威结果文件读取 ---
 _dom = {r["domain"]: r for r in csv.DictReader(open(OUT / "table_domains.csv"))}
@@ -82,7 +82,7 @@ ax.grid(alpha=0.25, axis="x"); ax.tick_params(labelsize=8.6)
 # --- C: PPV at 1% prevalence ---
 ax = fig.add_subplot(gs[2, :])
 labels = ["This study\nexternal, default 0.5 threshold", "This study\nexternal, Se@Sp90", "Validated algorithm\n99.5% specificity"]
-cols = [C_EXT1, "#9467bd", "#ff7f0e"]
+cols = [C_EXT1, "#CC79A7", "#E69F00"]
 bars = ax.bar(range(3), ppv, color=cols, width=0.5)
 for i, v in enumerate(ppv):
     ax.text(i, v + 1.5, f"{v:.1f}%", ha="center", fontsize=10, fontweight="bold")
@@ -99,5 +99,6 @@ fig.text(0.5, 0.022,
          ha="center", va="bottom", fontsize=9.0, color="#111111",
          bbox=dict(boxstyle="round,pad=0.6", facecolor="#f2f6fb", edgecolor="#4a6fa5", linewidth=1.2))
 
-fig.savefig(OUT / "graphical_abstract.png", dpi=200, bbox_inches="tight")
+fig.savefig(OUT / "graphical_abstract.png", dpi=600, bbox_inches="tight")
+fig.savefig(OUT / "graphical_abstract.tiff", dpi=600, bbox_inches="tight", pil_kwargs={"compression": "tiff_lzw"})
 print("saved:", OUT / "graphical_abstract.png")

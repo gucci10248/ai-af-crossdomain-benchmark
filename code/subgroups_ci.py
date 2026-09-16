@@ -175,8 +175,8 @@ def main():
     for ax, metric, title in [(axes[0], "AUROC", "AUROC（95% CI，聚类自助法）"),
                               (axes[1], "Se@Sp90", "特异度 90% 下的灵敏度（95% CI）")]:
         for yy, (_, r) in zip(ypos, allrows.iterrows()):
-            col = "#1f77b4" if r["group"].startswith("内部") or "内部" in r["group"] else \
-                  ("#2ca02c" if (r["group"].startswith("中国") or "中国域" in r["group"]) else "#d62728")
+            col = "#0072B2" if r["group"].startswith("内部") or "内部" in r["group"] else \
+                  ("#009E73" if (r["group"].startswith("中国") or "中国域" in r["group"]) else "#D55E00")
             ax.errorbar(r[metric], yy, xerr=[[r[metric] - r[f"{metric}_lo"]], [r[f"{metric}_hi"] - r[metric]]],
                         fmt="o", color=col, capsize=3, lw=1.5, ms=5)
             ax.text(1.01, yy, f"{r[metric]:.3f} [{r[f'{metric}_lo']:.2f},{r[f'{metric}_hi']:.2f}]",
@@ -185,7 +185,8 @@ def main():
     axes[0].set_yticks(ypos)
     axes[0].set_yticklabels([f"{r['group']}  (n={r['n']})" for _, r in allrows.iterrows()], fontsize=8)
     plt.tight_layout()
-    fig.savefig(OUT / "fig4_forest.png", dpi=200)
+    fig.savefig(OUT / "fig4_forest.png", dpi=600)
+    fig.savefig(OUT / "fig4_forest.tiff", dpi=600, pil_kwargs={"compression": "tiff_lzw"})
     print("\nsaved:", OUT / "fig4_forest.png")
 
 
